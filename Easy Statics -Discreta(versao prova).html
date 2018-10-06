@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<body>
+    <!-- ajuda a acentuação -->
+    <meta charset="utf8" >
+    <title>Easy Statics</title>
+    <h1 align="center">Easy Statics</h1>
+    <div class="container">
+        <canvas class="line-chart"></canvas>
+    </div>
+
+    <style>
+        .container {
+         width: 60vw;
+         height: 50vh;
+         display: flex;
+         flex-direction: row;
+         justify-content: center;
+         align-items: center;     
+        }
+        table {
+                border-collapse: collapse;
+                text-align: center;
+                position: relative;
+                font-weight: bold;
+
+            }
+
+            tr:nth-child(even) {
+                background: #d4d4d4;
+               
+            }
+
+            th,
+            td {
+                padding: 5px 8px;
+                border: 1px solid black;
+            }
+
+            th {
+                
+                border-bottom: 1px solid #d4d4d4;
+            }
+        </style>
+    </head>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+
+
+    <script type="text/javascript">
+        //vetor discreta           
+        let entrada = prompt("Digite Os numeros com ESPAÇO: ")
+        entrada = entrada.replace(/,/g, ".") //subistitui as virgulas
+        console.log('entrada: ' + entrada)
+        let vet100 = (entrada.split(' ').map(Number));
+        // vet100 = entrada.map(function(x){ return x.replace(/,/g,".") });
+        console.log(vet100)
+        // let vet100 = [15, 30, 40, 40, 20, 30, 20, 30, 30, 30]
+
+        let vetorLimpo = [] //vetor sem repetiçoes
+        let cont = 0 //para contar variaveis
+        let vetor = [] //vetor de objetos
+        let maior = 0 //maior frequencia
+        let moda = 0
+        let grafico1 = [] //cria os indices do grafico
+        let grafico2 = [] //cria as colunas do grafico
+        //organiza o vetor
+        //--------------------------------------------------------------------------------------------
+        function diretasort(vet) {
+            console.time("Tempo de Execução Inserção Direta");
+            let aux = 0;
+            let menor = 0;
+            for (let i = 0; i < vet.length - 1; ++i) {
+                menor = i //primeiro atribui o valor para parametro                           
+                for (let j = i + 1; j < vet.length; ++j) { // atribui j = a i mais 1
+                    if (vet[menor] > vet[j]) { //compara as posiçoes
+                        menor = j //atribui o indice para troca                    
+                    }
+                }
+                aux = vet[menor]
+                vet[menor] = vet[i] //troca o menor valor
+                vet[i] = aux //troca o maior valor
+                //limpa vetor
+            }
+            console.log(vet)
+            vetorLimpo = vet.filter(function (este, i) {
+                return vet.indexOf(este) == i;
+            })
+            console.log(vetorLimpo)
+            console.timeEnd("Tempo de Execução Inserção Direta");
+        }
+
+        //-----------------------------------------------------------
+        //chama funçar organizar
+        diretasort(vet100)
+
+        //-- clonar objeto
+        let obj = {
+            variavelPesquisada: '',
+            frequencia: '',
+            frequenciaPor: '',
+            fac: '',
+            facPorcentagem: '',
+        }
+        // atribui o objeto para as copias
+        for (let i = 0; i < vetorLimpo.length; ++i) {
+            vetor[i] = Object.assign({}, obj);
+            vetor[i].variavelPesquisada = vetorLimpo[i]
+            grafico1[i] = vetor[i].variavelPesquisada
+
+        }
+        console.log(vetor); // { a: 1 }
+        vetor.push(obj)
+        //-----------------------------------------------------------------
+
+        //joga frequencia
+        for (let x = 0; x < vetorLimpo.length; x++) {
+            cont = 0
+            for (let y = vet100.length; y >= 0; y--) {
+                if (vetorLimpo[x] === vet100[y]) {
+                    cont++;
+                }
+            }
+            vetor[x].frequencia = cont // jo NO OBJeto
+            grafico2[x] = vetor[x].frequencia // joga a frequencia para o grafico
+
+        }
+        //-------------------------------------------------------------
+        //frequencia acumulada
+        let vet3 = [];
+        let aux = 0;
+
+
+        function fac() {
+            vet3[0] = vetor[0].frequencia
+            aux = vetor[0].frequencia
+
+            for (var x = 0; x < vetorLimpo.length; x++) {
+
+                aux += vetor[x + 1].frequencia;
+                vet3[x + 1] = aux
+                vetor[x].fac = vet3[x]
+            }
+            return aux;
+        }
+        fac() //chama funçao frequencia acumulada
+
+
+        //---------------------------------------------------------------------
+        //calcula a moda
+        function funModa() {
+            maior = vetor[0].frequencia
+            for (let i = 1; i < vetor.length; ++i) {
+                // ignorar propriedades herdadas
+
+                if (vetor[i].frequencia > maior) {
+                    maior = vetor[i].frequencia;
+                    moda = vetor[i].variavelPesquisada
+                }
+            }
+        }
+        funModa()
+        //----------------------------------------------------------------
+        // Calcular a Média
+        let media = 0;
+
+        function funMedia() {
+
+            let divisor = 0;
+            let dividendo = 0;
+
+            for (let i = 0; i < vetor.length - 1; i++) {
+                dividendo += vetor[i].variavelPesquisada * vetor[i].frequencia;
+                divisor += vetor[i].frequencia;
+            }
+            media = dividendo / divisor;
+            console.log(media)
+            return media;
+
+        }
+        funMedia()
+        //-----------------------------------------------------------------------------
+        // Calcular Mediana
+        let mediana = 0;
+
+        function funMediana() {
+
+            let somatoria = 0;
+            let posicao = 0;
+            // Calcula a somatória do fi
+            for (let i = 0; i < vetor.length; i++) {
+                somatoria += vetor[i].frequencia;
+            }
+            mediana = somatoria / 2;
+
+            // Verifica a posião 
+            for (let i = 0; i < vetor.length; i++) {
+                if (mediana <= vetor[i].fac) {
+                    mediana = vetor[i].variavelPesquisada
+                    break;
+                }
+
+            }
+
+            return mediana;
+        }
+        funMediana()
+        //-----------------------------------------------------------------
+        //desvio padrao
+        let coificiente = 0
+        let desvioPadrao = 0
+        let aux2 = 0
+        let aux3 = 0
+
+        function funDesvio() {
+            for (let i = 0; i < vetor.length - 1; ++i) {
+                aux2 = vetor[i].variavelPesquisada - media // tira a media da variavel
+                //desvio padrao recebe frequencia - media elevado ao quadrado
+                desvioPadrao = (Math.pow(aux2, 2) * vetor[i].frequencia) + desvioPadrao
+
+            }
+            aux3 = desvioPadrao / (aux - 1) //auxiliar para receber o desvio
+            desvioPadrao = parseFloat(Math.sqrt(aux3).toFixed(2))
+            //--------------------------------------------------------------
+            //coificiente padrao
+            coificiente = Math.round((desvioPadrao / media) * 100)
+        }
+        funDesvio() //chama funçao desvio padrao
+
+        //CALCULA A O TOTAL DE fi
+        let somatoriaFi = 0;
+
+        function somaFi() {
+            for (let i = 0; i < vetor.length; i++) {
+                somatoriaFi += vetor[i].variavelPesquisada;
+            }
+            return somatoriaFi
+        }
+
+        //Medidas separatrizes
+        let Q = 0
+        let k = 0
+        let param;
+
+        somaFi();
+        console.log(somatoriaFi)
+
+
+
+        //--------------------------------------------------------------------
+        //cria e preenche a tabela
+        document.write('<hr>')
+        document.write('<h3 align = center>TABELA</h3>')
+        document.write('<table align = center>')
+        document.write('<tr>')
+        document.write(
+            '<td>Variavel Pesquisada(xi)</td><td>Frequencia(fi)</td><td>Frequencia%(fi%)</td><td>Frequencia Acumulada</td><td>Fac %</td>'
+        )
+        document.write('</tr>') //primeira linha
+let totalfac =0
+        for (let linha = 0; linha < vetorLimpo.length; ++linha) {
+            vetor[linha].frequenciaPor = Math.round((vetor[linha].frequencia / vet100.length) * 100)
+            
+            vetor[linha].facPorcentagem += Math.round((vetor[linha].fac / vet100.length) * 100)
+            totalfac = Math.round(vetor[linha].facPorcentagem)
+            
+              document.write('<tr>')
+            //primeira coluna
+            document.write('<td>' + vetorLimpo[linha] + '</td><td>' + vetor[linha].frequencia + '</td>')
+            //terceira coluna
+
+            document.write('<td>' + Math.round((vetor[linha].frequencia / vet100.length) * 100) + '%' + '</td>')
+            //
+
+            //quarta coluna
+            document.write('<td>' + parseInt((vetor[linha].fac)) + '</td>')
+           
+
+            //coluna fac porcentagem
+            document.write('<td>' + (vetor[linha].facPorcentagem) + '%' + '</td>')
+            document.write('</tr>')
+        }
+        document.write('<td>' + 'Total' + '</td>' +'<td>' + vet100.length + '</td>')
+        document.write('<td>' + totalfac +'%' + '</td>' +'<td>' + vet100.length + '</td>')
+        document.write('</table><br>')
+        
+        document.write('<hr>')
+        //----------------------------------------------------------------------------------------
+        //cria grafico
+        var ctx = document.getElementsByClassName("line-chart")
+        var chartGraph = new Chart(ctx, {
+            type: "bar",
+            data: {
+                labels: [],
+                datasets: [{
+                    label: "Variavel Pesquisada",
+                    // data: [vetor[0].variavelPesquisada, vetor[length].variavelPesquisada],
+                    data: [],
+                    borderWidth: 6,
+                    borderColor: 'rgb(0,0,205)',
+
+                }]
+            },
+            options: {
+                responsive: true,
+                title: {
+                    display: true,
+                    fontSize: 20,
+                    text: "Grafico Discreto"
+                },
+                labels: {
+                    fontSize: "bold",
+                },
+
+            }
+        })
+
+
+        //enche o grafico com dados
+        function addData(chart) {
+            for (let i = 0; i < vetor.length - 1; ++i) {
+                chart.data.labels.push(grafico1[i]);
+                chart.data.datasets.forEach((dataset) => {
+                    dataset.data.push(grafico2[i]);
+                })
+            }
+            chart.update();
+        }
+        addData(chartGraph) //passa o parametro
+        //------------------------------------------------------------------------------
+        //resultados
+        document.write('<h3 align = center>RESULTADOS</h3>')
+        document.write('<table align = center>')
+        document.write('<tr>')
+        document.write(
+            '<td>Media(x)</td><td>Moda(Mo)</td><td>Mediana(Md)</td><td>Desvio Padrao(dx)</td><td>Coificiente Padrão</td>'
+        )
+        document.write('</tr>') //primeira linha
+        document.write('<tr>')
+        //primeira coluna
+        document.write('<td>' + media + '</td><td>' + moda + '</td>')
+        //terceira coluna
+        document.write('<td>' + mediana + '</td>')
+        //quarta coluna
+        document.write('<td>' + desvioPadrao + '</td>')
+        document.write('<td>' + coificiente + '%' + '</td>')
+        document.write('</tr>')
+        document.write('</table><br>')
+
+
+        //-----------------------------------------------------------------------------------
+        document.write('<hr>')
+        //Tabela Quartil
+        document.write('<h3 align = center>MEDIDAS SEPARATRIZES</h3>')
+        document.write('<table><br>')
+        document.write('<tr>')
+        document.write('<td>Quartil</td>' + '<td>' + 'Q1(25%)' + '</td>')
+        document.write('<td>Q2(50%)</td><td>Q3(75%)</td><td>Q4(100%)</td>')
+        document.write('</tr>')
+        document.write('<tr>')
+        document.write('<td>' + 'Q' + '</td>')
+        //enche a tabela
+        for (let i = 25; i <= 100; i += 25) {
+
+            Q = somatoriaFi * i / 100;
+            document.write('<td>' + Q + '</td>')
+
+        }
+        document.write('</tr>')
+        document.write('</table>')
+
+        //---------------------------------------------------------------------------------------
+        //Tabela Quintil
+        document.write('<table><br>')
+        document.write('<tr>')
+        document.write('<td>Quintil</td>' + '<td>' + 'K1(20%)' + '</td>')
+        document.write('<td>K2(40%)</td><td>K3(60%)</td><td>K4(80%)</td><td>K5(100%)</td>')
+        document.write('</tr>')
+        document.write('<tr>')
+        document.write('<td>' + 'K' + '</td>')
+        let cont3 = 0
+
+        for (let i = 20; i <= 100; i += 20) {
+
+            Q = somatoriaFi * i / 100;
+            document.write('<td> ' + Q + '</td>')
+        }
+        document.write('</tr>')
+        document.write('</table>')
+        //----------------------------------------------------------------
+        //Decil
+        document.write('<table><br>')
+        document.write('<tr>')
+        document.write('<td>Decil</td>' + '<td>' + 'D1(10%)' + '</td>')
+        document.write('<td>D2(20%)</td><td>D3(30%)</td><td>D4(40%)</td><td>D5(50%)</td>')
+        document.write('<td>D6(60%)</td><td>D7(70%)</td><td>D8(80%)</td><td>D9(90%)</td><td>D10(100%)</td>')
+
+        document.write('</tr>')
+        document.write('<tr><td>' + 'D' + '</td>')
+        cont3 = 0;
+
+        for (let i = 10; i <= 100; i += 10) {
+
+            document.write('<td>')
+            Q = somatoriaFi * i / 100;
+            document.write(Q)
+            document.write('</td>')
+        }
+        document.write('</tr>')
+        document.write('</table>')
+
+        //Tabela Porcentil
+        document.write('<table><br>')
+        document.write('<tr>')
+
+        document.write('<th>Porcentil % </th>')
+
+
+
+
+        for (let i = 1; i <= 100; i += 1) {
+            cont3 += 1
+
+            document.write('<td>')
+            document.write('P' + cont3)
+            document.write('</td>')
+            document.write('</tr>')
+
+            document.write('<tr>')
+            document.write('<td>')
+            Q = (somatoriaFi * i) / 100;
+            document.write(Q)
+            document.write('</td>')
+        }
+        document.write('</tr>')
+        document.write('</table>')
+    </script>
+</body>
+
+
+</html>
