@@ -6,42 +6,91 @@
 
     <!-- ajuda a acentuação -->
     <meta charset="utf8">
-    <title>Easy Statics</title>
-    <!--<h1 align="center">Easy Statics</h1>-->
+    <div class="page-header">
+        <h1>Easy Statics: Discreta</h1>
+    </div>
 
     <style>
+
+
+        .page-header {
+        background-color: #90EE90;
+        margin-top: 0;
+        padding: 10px 20px 20px 30px;
+        border:2px solid black;
+        text-align: center;
+        -webkit-text-stroke-width: 1px;
+        -webkit-text-stroke-color: #000000;
+        font-family: fantasy
+        }
+
+        h1 {
+            color:white;
+            font-size: 50px;
+        }
+        body {
+               background-color:whitesmoke
+        }
         table {
-           border: 1px solid;
                 border-collapse: collapse;
                 text-align: center;
                 position: relative;
                 font-weight: bold;
+                align-items: center
+                    }
+        
+                    tr:nth-child(even) {
+                        background: #d4d4d4;       
+                    }
+        
+                    th,
+                    td {
+                        padding: 5px 8px;
+                        border: 1px solid black;
+                    }
+        
+                    th {
+                        
+                        border-bottom: 1px solid white;
+                    }
+        button.css3button {
+	       font-family: Arial, Helvetica, sans-serif;
+	        font-size: 14px;
+	        color: #123d54;
+	        padding: 10px 20px;
+	        background: -moz-linear-gradient(
+		     top,
+		     #19fa05 0%,
+		     #54c3ff);
+	        background: -webkit-gradient(
+	    	    linear, left top, left bottom,
+	    	from(#19fa05),
+		    to(#54c3ff));
+	        -moz-border-radius: 6px;
+	        -webkit-border-radius: 6px;
+	        border-radius: 6px;
+	        border: 1px solid #000000;
+	        -moz-box-shadow:
+	    	    0px 1px 3px rgba(000,000,000,0.5),
+	        	inset 0px 0px 1px rgba(255,255,255,1);
+        	-webkit-box-shadow:
+    		    0px 1px 3px rgba(000,000,000,0.5),
+	    	inset 0px 0px 1px rgba(255,255,255,1);
+	    box-shadow:
+		    0px 1px 3px rgba(000,000,000,0.5),
+	    	inset 0px 0px 1px rgba(255,255,255,1);
+    	text-shadow:
+	    	0px -1px 0px rgba(000,000,000,0.7),
+		    0px 1px 0px rgba(255,255,255,0.3);
+}
 
-            }
 
-            tr:nth-child(even) {
-                background: #d4d4d4;
-               
-            }
-
-            th,
-            td {
-                padding: 5px 8px;
-                border: 1px solid black;
-            }
-
-            th {
-                
-                border-bottom: 1px solid #d4d4d4;
-            }
-        </style>
+</style>
 </head>
-
 <script type="text/javascript">
     //vetor discreta 
 
     let vet100
-
 
     function botao(form) {
         form = (form.campo.value)
@@ -52,11 +101,14 @@
     let est = 0;
 
     function estima() {
-        for (let i = 0; i < document.estimacao.quan.length; i++) {
+        var i
+
+        for (i = 0; i < document.estimacao.quan.length; i++) {
             if (document.estimacao.quan[i].checked) {
 
                 break;
             }
+
 
         }
         return est = document.estimacao.quan[i].value
@@ -222,7 +274,7 @@
                 // tira a media da variavel
                 //desvio padrao recebe frequencia - media elevado ao quadrado
                 desvioPadrao += parseFloat((Math.pow(aux2, 2) * vetor[i].frequencia).toFixed(2)) //+ desvioPadrao)
-                console.log(desvioPadrao)
+
             }
             aux3 = desvioPadrao / (aux - est) //auxiliar para receber o desvio
             desvioPadrao = parseFloat(Math.sqrt(aux3).toFixed(2))
@@ -248,179 +300,166 @@
         let param;
 
         somaFi();
-        console.log(somatoriaFi)
-
-
-    
-        //--------------------------------------------------------------------
-        //cria e preenche a tabela
-        document.write('<hr>')
-        document.write('<h3 align = center>TABELA</h3>')
-        document.write('<table align = center class="w3-table-all">')
-        document.write('<tr>')
-        document.write(
-            '<td>Variavel Pesquisada(xi)</td><td>Frequencia(fi)</td><td>Frequencia%(fi%)</td><td>Frequencia Acumulada</td><td>Fac %</td>'
-        )
-        document.write('</tr>') //primeira linha
+        //-------------------------------------------------------------------
+        //cria 1 tabela
+        var HTML = "<table align=center><tr>";
+        HTML += ('<h3 align = center>TABELA</h3>')
+        HTML += '<td>Variavel Pesquisada(xi)</td><td>Frequencia(fi)</td>'
+        HTML += '<td>Frequencia%(fi%)</td><td>Frequencia Acumulada</td><td>Fac %</td></tr>'
         let totalfac = 0
         for (let linha = 0; linha < vetorLimpo.length; ++linha) {
+            //calculos frequencia
             vetor[linha].frequenciaPor = Math.round((vetor[linha].frequencia / vet100.length) * 100)
-
             vetor[linha].facPorcentagem += Math.round((vetor[linha].fac / vet100.length) * 100)
             totalfac = Math.round(vetor[linha].facPorcentagem)
-
-            document.write('<tr>')
+            //atribuiçao
+            HTML += ('<tr>')
             //primeira coluna
-            document.write('<td>' + vetorLimpo[linha] + '</td><td>' + vetor[linha].frequencia + '</td>')
+            HTML += '<td>' + vetorLimpo[linha] + '</td><td>' + vetor[linha].frequencia + '</td>' //terceira coluna
             //terceira coluna
-
-            document.write('<td>' + Math.round((vetor[linha].frequencia / vet100.length) * 100) + '%' + '</td>')
-            //
-
+            HTML += '<td>' + Math.round((vetor[linha].frequencia / vet100.length) * 100) + '%' + '</td>' //quarta coluna
             //quarta coluna
-            document.write('<td>' + parseInt((vetor[linha].fac)) + '</td>')
-
-
+            HTML += '<td>' + parseInt((vetor[linha].fac)) + '</td>'
             //coluna fac porcentagem
-            document.write('<td>' + (vetor[linha].facPorcentagem) + '%' + '</td>')
-            document.write('</tr>')
+            HTML += '<td>' + (vetor[linha].facPorcentagem) + '%' + '</td>'
         }
-        document.write('<td>' + 'Total' + '</td>' + '<td>' + vet100.length + '</td>')
-        document.write('<td>' + totalfac + '%' + '</td>' + '<td>' + vet100.length + '</td><td>' + 'bla' + '</td>')
-        document.write('</table><br>')
-        
-
-        document.write('<hr>')
-        //----------------------------------------------------------------------------------------
-
-        //------------------------------------------------------------------------------
-        //resultados
-        document.write('<h3 align = center>RESULTADOS</h3>')
-        document.write('<table align = center>')
-        document.write('<tr>')
-        document.write(
+        HTML += ('<tr><td text="bold">' + 'Total' + '</td>' + '<td>' + vet100.length + '</td>')
+        HTML += ('<td>' + totalfac + '%' + '</td>' + '<td>' + vet100.length + '</td><td>' + " " + '</td>')
+        HTML += "</tr></table>"; //fecha tabela
+        document.getElementById("outputDiv").innerHTML = HTML; //atribui no div
+        //-------------------------------------------------------------------------
+        //resultados------------------------------------------------------------------
+        var tbl_resul = '<table align=center><tr>';
+        tbl_resul += ('<h3 align = center>RESULTADOS</h3>')
+        tbl_resul += ('<table align = center class="tabela">')
+        tbl_resul += ('<tr>')
+        tbl_resul += (
             '<td>Media(x)</td><td>Moda(Mo)</td><td>Mediana(Md)</td><td>Desvio Padrao(dx)</td><td>Coificiente Padrão</td>'
         )
-        document.write('</tr>') //primeira linha
-        document.write('<tr>')
+        tbl_resul += ('</tr>') //primeira linha
+        tbl_resul += ('<tr>')
         //primeira coluna
-        document.write('<td>' + media + '</td><td>' + moda + '</td>')
+        tbl_resul += ('<td>' + media + '</td><td>' + moda + '</td>')
         //terceira coluna
-        document.write('<td>' + mediana + '</td>')
+        tbl_resul += ('<td>' + mediana + '</td>')
         //quarta coluna
-        document.write('<td>' + desvioPadrao + '</td>')
-        document.write('<td>' + coificiente + '%' + '</td>')
-        document.write('</tr>')
-        document.write('</table><br>')
-
-
-        //-----------------------------------------------------------------------------------
-        document.write('<hr>')
-        //Tabela Quartil
-        document.write('<h3 align = center>MEDIDAS SEPARATRIZES</h3>')
-        document.write('<table><br>')
-        document.write('<tr>')
-        document.write('<td>Quartil</td>' + '<td>' + 'Q1(25%)' + '</td>')
-        document.write('<td>Q2(50%)</td><td>Q3(75%)</td><td>Q4(100%)</td>')
-        document.write('</tr>')
-        document.write('<tr>')
-        document.write('<td>' + 'Q' + '</td>')
+        tbl_resul += ('<td>' + desvioPadrao + '</td>')
+        tbl_resul += ('<td>' + coificiente + '%' + '</td>')
+        tbl_resul += ('</tr></table>')
+        document.getElementById("outresultado").innerHTML = tbl_resul; //atribui no div
+        //------------------------------------------------------------------------------
+        //Tabela Quartil---------------------------------------------------------------------
+        var tbl_quartil = '<table><tr>'
+        tbl_quartil += ('<h3 align = center>MEDIDAS SEPARATRIZES</h3>')
+        tbl_quartil += ('<tr>')
+        tbl_quartil += ('<td>Quartil</td>' + '<td>' + 'Q1(25%)' + '</td>')
+        tbl_quartil += ('<td>Q2(50%)</td><td>Q3(75%)</td><td>Q4(100%)</td>')
+        tbl_quartil += ('</tr>')
+        tbl_quartil += ('<tr>')
+        tbl_quartil += ('<td>' + 'Q' + '</td>')
         //enche a tabela
         for (let i = 25; i <= 100; i += 25) {
-
             Q = somatoriaFi * i / 100;
-            document.write('<td>' + Q + '</td>')
+            tbl_quartil += ('<td>' + Q + '</td>')
 
         }
-        document.write('</tr>')
-        document.write('</table>')
+        tbl_quartil += ('</tr>')
+        tbl_quartil += ('</table>')
+        document.getElementById("outquartil").innerHTML = tbl_quartil; //atribui no div
 
-        //---------------------------------------------------------------------------------------
+        //-------------------------------------------------------------------------------------------
         //Tabela Quintil
-        document.write('<table><br>')
-        document.write('<tr>')
-        document.write('<td>Quintil</td>' + '<td>' + 'K1(20%)' + '</td>')
-        document.write('<td>K2(40%)</td><td>K3(60%)</td><td>K4(80%)</td><td>K5(100%)</td>')
-        document.write('</tr>')
-        document.write('<tr>')
-        document.write('<td>' + 'K' + '</td>')
+        var tbl_quintil = '<table><tr>'
+        tbl_quintil += ('<td>Quintil</td>' + '<td>' + 'K1(20%)' + '</td>')
+        tbl_quintil += ('<td>K2(40%)</td><td>K3(60%)</td><td>K4(80%)</td><td>K5(100%)</td>')
+        tbl_quintil += ('</tr>')
+        tbl_quintil += ('<tr>')
+        tbl_quintil += ('<td>' + 'K' + '</td>')
         let cont3 = 0
 
         for (let i = 20; i <= 100; i += 20) {
-
             Q = somatoriaFi * i / 100;
-            document.write('<td> ' + Q + '</td>')
+            tbl_quintil += ('<td> ' + Q + '</td>')
         }
-        document.write('</tr>')
-        document.write('</table>')
-        //----------------------------------------------------------------
+        tbl_quintil += ('</tr></table>')
+        document.getElementById("outquintil").innerHTML = tbl_quintil
+        //-----------------------------------------------------------------------------------
         //Decil
-        document.write('<table><br>')
-        document.write('<tr>')
-        document.write('<td>Decil</td>' + '<td>' + 'D1(10%)' + '</td>')
-        document.write('<td>D2(20%)</td><td>D3(30%)</td><td>D4(40%)</td><td>D5(50%)</td>')
-        document.write('<td>D6(60%)</td><td>D7(70%)</td><td>D8(80%)</td><td>D9(90%)</td><td>D10(100%)</td>')
+        tbl_decil = ('<table class="tabela">')
+        tbl_decil += ('<tr>')
+        tbl_decil += ('<td>Decil</td>' + '<td>' + 'D1(10%)' + '</td>')
+        tbl_decil += ('<td>D2(20%)</td><td>D3(30%)</td><td>D4(40%)</td><td>D5(50%)</td>')
+        tbl_decil += ('<td>D6(60%)</td><td>D7(70%)</td><td>D8(80%)</td><td>D9(90%)</td><td>D10(100%)</td>')
 
-        document.write('</tr>')
-        document.write('<tr><td>' + 'D' + '</td>')
+        tbl_decil += ('</tr>')
+        tbl_decil += ('<tr><td>' + 'D' + '</td>')
         cont3 = 0;
 
         for (let i = 10; i <= 100; i += 10) {
 
-            document.write('<td>')
+            tbl_decil += ('<td>')
             Q = somatoriaFi * i / 100;
-            document.write(Q)
-            document.write('</td>')
+            tbl_decil += (Q)
+            tbl_decil += ('</td>')
         }
-        document.write('</tr>')
-        document.write('</table>')
-
+        tbl_decil += ('</tr>')
+        tbl_decil += ('</table>')
+        document.getElementById("outdecil").innerHTML = tbl_decil
+        //-----------------------------------------------------------------
         //Tabela Porcentil
-        document.write('<br><table>')
-        document.write('<tr>')
-
-        document.write('<th>Porcentil % </th>')
-
-
-
-
+        tbl_percentil = ('<table>')
+        tbl_percentil += ('<tr>')
+        tbl_percentil += ('<td>Porcentil % </td><td>P</td></tr><tr>')
         for (let i = 1; i <= 100; i += 1) {
             cont3 += 1
+            tbl_percentil += ('<tr>')
 
+            tbl_percentil += ('<td>')
+            tbl_percentil += ('P' + cont3 + '%')
+            tbl_percentil += ('</td>')
 
-            document.write('<tr>')
-            document.write('<td>')
+            tbl_percentil += ('<td>')
             Q = (somatoriaFi * i) / 100;
-            document.write(Q)
-            document.write('</td>')
+            tbl_percentil += (Q)
+            tbl_percentil += ('</td>')
 
-            document.write('<td>')
-            document.write('P' + cont3)
-            document.write('</td>')
-            document.write('</tr>')
+            tbl_percentil += ('</tr>')
         }
-        document.write('</tr>')
-        document.write('</table>')
-    }
+        tbl_percentil += ('</tr>')
+        tbl_percentil += ('</table>')
+        document.getElementById("outpercentil").innerHTML = tbl_percentil
+
+    } //final funçao total
 </script>
 
 <body>
-    <h1>Easy Statics</h1>
     <h3>Selecione a estimação</h3>
-    <form name="estimacao" onchange="estima()">
-        <input type="radio" name="quan" value=0 /> População <br />
-        <input type="radio" name="quan" value=1 /> amostra<br />
-
-    </form>
+    <div id="formu">
+        <form name="estimacao" onchange="estima()">
+            <input type="radio" name="quan" value=0 /> População <br />
+            <input type="radio" name="quan" value=1 /> amostra<br />
+        </form>
+        <br>
+        <h3>Digite os dados</h3>
+        <form class="formulario-validacao" id="form">
+            <input type="text" name="campo" id="input" />
+            <button type="button" name="submit" value="Enviar" onclick="botao(this.form),total()" class="css3button">Enviar</button>
+        </form>
+    </div>
     <br>
-    <h3>Digite os dados</h3>
-    <form class="formulario-validacao" id="form">
-        <input type=" text" name="campo" />
-        <div id="teste"></div>
-        <input type="button" NAME="submit" value="Enviar" onclick="botao(this.form),total()">
-    </form>
-
+    <hr>
+    <div id="outputDiv"></div>
+    <br>
+    <div id="outresultado"></div>
+    <br>
+    <hr>
+    <div id="outquartil"></div>
+    <br>
+    <div id="outquintil"></div>
+    <br>
+    <div id="outdecil"></div>
+    <br>
+    <div id="outpercentil"></div>
 </body>
-
 
 </html>
