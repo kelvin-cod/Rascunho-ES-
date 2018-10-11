@@ -65,7 +65,7 @@
 	        background: -webkit-gradient(
 	    	    linear, left top, left bottom,
 	    	from(#19fa05),
-		    to(#54c3ff));
+		    to(white));
 	        -moz-border-radius: 6px;
 	        -webkit-border-radius: 6px;
 	        border-radius: 6px;
@@ -206,14 +206,15 @@
         //calcula a moda
         function funModa() {
             maior = vetor[0].frequencia
-            for (let i = 1; i < vetor.length; ++i) {
+            for (let i = 0; i < vetor.length -1; ++i) {
                 // ignorar propriedades herdadas
 
-                if (vetor[i].frequencia > maior) {
+                if (vetor[i].frequencia >= maior) {
                     maior = vetor[i].frequencia;
                     moda = vetor[i].variavelPesquisada
                 }
             }
+            return moda
         }
         funModa()
         //----------------------------------------------------------------
