@@ -37,6 +37,8 @@
 
     function botao(form) {
         form = (form.campo.value)
+        form = form.replace(/,/g, ".")
+        console.log(form)
         vet100 = (form.split(' ').map(Number));
         return vet100
     }
@@ -267,8 +269,6 @@
                     mediana = ((mediana).toFixed(2))
                     break;
                 }
-
-
 
             }
 

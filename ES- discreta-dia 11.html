@@ -94,6 +94,7 @@
 
     function botao(form) {
         form = (form.campo.value)
+        form = form.replace(/,/g, ".")
         vet100 = (form.split(' ').map(Number));
         return vet100
         console.log(vet100)
@@ -206,7 +207,7 @@
         //calcula a moda
         function funModa() {
             maior = vetor[0].frequencia
-            for (let i = 0; i < vetor.length -1; ++i) {
+            for (let i = 0; i < vetor.length - 1; ++i) {
                 // ignorar propriedades herdadas
 
                 if (vetor[i].frequencia >= maior) {
@@ -230,7 +231,7 @@
                 dividendo += vetor[i].variavelPesquisada * vetor[i].frequencia;
                 divisor += vetor[i].frequencia;
             }
-            media = parseFloat((dividendo / divisor).toFixed(1));
+            media = parseFloat((dividendo / divisor).toFixed(2));
             return (media)
 
         }
