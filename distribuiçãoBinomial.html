@@ -4,42 +4,74 @@
 <head>
 
     <meta charset="UTF-8" />
-    <title>Document</title>
+    <title>Binomial</title>
+    <div class="page-header">
+        <h1>Easy Statics: BiNomial</h1>
+    </div>
+
+    <style>
+        .page-header {
+        background-color:#00E676;
+        margin-top: 0;
+        padding: 10px 20px 20px 30px;
+        border:1px solid black;
+        text-align: center;
+        -webkit-text-stroke-width: 1px;
+        -webkit-text-stroke-color: #ffffff;
+        font-family: fantasy;
+        position: relative;
+        }
+        p {
+            text-anchor: start;
+            font-weight: bold;
+            text-align:center;
+        }
+        input{
+            width: 40px
+        }
+        #form1{
+            width: 300px;
+            height: 250px;
+            background: rgb(93, 170, 241);
+            color: rgb(5, 5, 5);
+            text-align:center;
+            position: relative;
+        }
+    </style>
 </head>
 <script>
     // Digitar fracasso e sucesso
-    let sucesso = parseFloat(prompt('Digite o sucesso (p)'))
-    let fracasso = parseFloat(prompt('Digite o fracasso (q)'))
-    let n = parseFloat(prompt('Digite o tamanho da amostra (n)'))
+    let sucesso =0
+    let fracasso =0
+    let n=0
+    let k=0
+    let result=0
 
-
-
-    /*
+    
     function botao(form) {
-
-        form = document.getElementById("input").value
-        console.log(form)
-        sucesso = form
+        n = document.getElementById("Total_N").value
+        sucesso = document.getElementById("Sucesso_S").value
+        fracasso = document.getElementById("Fracasso_F").value
+        k = document.getElementById("Variavel_K").value
         //fracasso = form
-        return sucesso
-
+      //  return sucesso,fracasso,n,k
+        console.log('sucesso: ' +sucesso)
+        console.log('fracasso: ' +fracasso)
+        console.log('n: ' +n)
+        console.log('k: ' +k)
     }
-    document.write(sucesso)
-    document.write(fracasso)
-    */
-
+    
     // função binomial
     function binomial(x, y) {
         let p = sucesso / (sucesso + fracasso);
         let q = fracasso / (sucesso + fracasso);
 
-        let result = fatorial(n) / (fatorial(k) * (fatorial(n - k)))
-        document.write(result)
-
+         result = fatorial(n) / (fatorial(k) * (fatorial(n - k)))    
         let PK = (result * ((Math.pow(p, k))) * (Math.pow(q, (n - k)))) * 100
 
-        document.write('<br>')
-        document.write(PK)
+       return result
+       console.log(result)
+       document.getElementById("resultado").innerHTML = document.write(result)
     }
 
     // função fatorial
@@ -53,16 +85,39 @@
         }
     }
 
-
-
     // chamando binomial
-    binomial(n, k);
+    
 </script>
 
-
 <body>
-
     <!-- Conteúdo -->
+    <div id="form1">
+        <h2>Digite os Dados:</h2>
+        <form class="formulario-validacao" id="form">
+            <p>
+                <input type="text" name="campo" id="Total_N" />
+                <label for="nome">Tamanho(N)</label>
+            </p>
+            <p>
+                <input type="text" name="campo" id="Sucesso_S" />
+                <label for="nome">Sucesso(S)</label>
+            </p>
+            <p>
+                <input type="text" name="campo" id="Fracasso_F" />
+                <label for="nome">Fracasso(F)</label>
+            </p>
+            <p>
+                <input type="text" name="campo" id="Variavel_K" />
+                <label for="nome">Variavel(K)</label>
+            </p>
+            <button type="button" name="submit" value="Enviar" onclick="botao(this.form),binomial(n, k)" class="css3button">Enviar</button>
+        </form>
+    </div>
+    <div id="opçoes"></div>
+    <hr>
+    <br>
+    <div id="resultado">
+    </div>
 </body>
 
 
