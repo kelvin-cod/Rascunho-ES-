@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<script>
+    // Digitar fracasso e sucesso
+    let sucesso = parseFloat(prompt('Digite o sucesso (p)'))
+    let fracasso = parseFloat(prompt('Digite o fracasso (q)'))
+    let n = parseFloat(prompt('Digite o tamanho da amostra (n)'))
+    let k = parseFloat(prompt('Digite a probabilidade (k)'))
+
+
+    /*
+    function botao(form) {
+
+        form = document.getElementById("input").value
+        console.log(form)
+        sucesso = form
+        //fracasso = form
+        return sucesso
+
+    }
+    document.write(sucesso)
+    document.write(fracasso)
+    */
+
+    // função binomial
+    function binomial(x, y) {
+        let p = sucesso / (sucesso + fracasso);
+        let q = fracasso / (sucesso + fracasso);
+
+        let result = fatorial(n) / (fatorial(k) * (fatorial(n - k)))
+        document.write(result)
+
+        let PK = (result *((Math.pow(p, k))) * (Math.pow(q , (n-k)))) * 100
+
+        document.write('<br>')
+        document.write(PK)
+    }
+    
+    // função fatorial
+    function fatorial(num) {
+        if (num < 0) {
+            return -1;
+        }
+        else if (num == 0) {
+            return 1;
+        }
+        else {
+            return (num * fatorial(num - 1));
+        }
+    }
+
+    
+
+    // chamando binomial
+    binomial(n, k);
+
+</script>
+
+
+<body>
+
+    <!-- Conteúdo -->
+</body>
+
+
+</html>
