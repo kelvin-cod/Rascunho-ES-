@@ -7,15 +7,28 @@
     <!-- ajuda a acentuação -->
     <meta charset="utf8">
     <title>Easy Statics (continua)</title>
-    <h3 align=center>Easy Statics(continua)</h3>
+    <div class="page-header">
+        <h1 align=center>Easy Statics:continua</h1>
+    </div>
     <style>
+        .page-header {
+        background-color:#00E676;
+        margin-top: 0;
+        padding: 10px 20px 20px 30px;
+        border:1px solid black;
+        text-align: center;
+        -webkit-text-stroke-width: 1px;
+        -webkit-text-stroke-color:white;
+        font-family: fantasy
+        }
         table {
 
                 border-collapse: collapse;
                 text-align: center;
+                text-decoration: greenyellow
             }
 
-            tr :nth-child(even) {
+            tr:nth-child(even) {
                 background: #d4d4d4;
             }
 
@@ -131,8 +144,6 @@
         intervaloClasse()
         console.log('intervalo de classe:' + ic)
 
-
-
         //---------------------------------------------------------
         //-- clonar objeto
         let obj = {
@@ -233,7 +244,7 @@
             }
             media = (dividendo / divisor);
 
-            return (media).toFixed(2);
+            return media;
 
         }
         funMedia()
@@ -317,151 +328,143 @@
         let param;
 
         somaFi();
-        console.log(somatoriaFi)
+
         //--------------------------------------------------------------------
-
-        console.log(vetor)
-
-        document.write('<h3 align = center>TABELA</h3>')
-        document.write('<table align = center>')
-        document.write('<tr>')
-        document.write(
+        let tbl_tabela = ('<table align=center>')
+        tbl_tabela += ('<h3 align = center>TABELA</h3>')
+        tbl_tabela += ('<tr>')
+        tbl_tabela += (
             '<td>Classe</td><td>Intervalo de Classe</td><td>Frequencia(fi)</td><td>Frequencia%</td><td>Frequencia Acumulada</td>'
         )
-        document.write('</tr>')
+        tbl_tabela += ('</tr>')
 
         let contClasses = 1
 
         for (let linha = 0; linha < k; ++linha) {
-            document.write('<tr>')
+            tbl_tabela += ('<tr>')
             //primeira coluna classe
-            document.write('<td>' + contClasses + '</td>')
+            tbl_tabela += ('<td>' + contClasses + '</td>')
             vetor[linha].classe = contClasses
             //segunda coluna intervalo de classe
-            document.write('<td>' + xmin + ' |--- ' + (xmin += ic) + '</td>')
+            tbl_tabela += ('<td>' + xmin + ' |--- ' + (xmin += ic) + '</td>')
             //terceira coluna
-            document.write('<td>' + vetor[linha].frequencia + '</td>')
+            tbl_tabela += ('<td>' + vetor[linha].frequencia + '</td>')
             //quarta coluna
-            document.write('<td>' + Math.round((vetor[linha].frequencia / vet100.length) * 100) + '%' + '</td>')
+            tbl_tabela += ('<td>' + Math.round((vetor[linha].frequencia / vet100.length) * 100) + '%' + '</td>')
             //
             vetor[linha].frequenciaPor = Math.round((vetor[linha].frequencia / vet100.length) * 100) + '%'
             //quarta coluna
-            document.write('<td>' + parseInt((vetor[linha].fac)) + '</td>')
+            tbl_tabela += ('<td>' + parseInt((vetor[linha].fac)) + '</td>')
             //quarta coluna
 
-            document.write('</tr>')
+            tbl_tabela += ('</tr>')
             contClasses++
         }
-        document.write('</table>')
-        document.write('<hr>')
-        //----------------------------------------------------------------------
-        document.write('<h3 align = center>RESULTADOS</h3>')
+        tbl_tabela += ('</table>')
+        document.getElementById("outTabela").innerHTML = tbl_tabela
+        //---------------------------------------------------------------------------
         //resultados
-        document.write('<table align = center>')
-        document.write('<tr>')
-        document.write(
+        let tbl_resul = ('<table align = center>')
+        tbl_resul += ('<h3 align = center>RESULTADOS</h3>')
+        tbl_resul += ('<tr>')
+        tbl_resul += (
             '<td>Media(x)</td><td>Moda(Mo)</td><td>Mediana(Md)</td><td>Desvio Padrao(dx)</td><td>Coificiente Padrão</td>'
         )
-        document.write('</tr>') //primeira linha
-        document.write('<tr>')
+        tbl_resul += ('</tr>') //primeira linha
+        tbl_resul += ('<tr>')
         //primeira coluna
-        document.write('<td>' + media.toFixed(2) + '</td><td>' + moda + '</td>')
+        tbl_resul += ('<td>' + media + '</td><td>' + moda + '</td>')
         //terceira coluna
-        document.write('<td>' + mediana + '</td>')
+        tbl_resul += ('<td>' + mediana + '</td>')
         //quarta coluna
-        document.write('<td>' + desvioPadrao + '</td>')
-        document.write('<td>' + coificiente + '%' + '</td>')
-        document.write('</tr>')
-        document.write('</table><br>')
-        //---------------------------------------------------------------------------------
+        tbl_resul += ('<td>' + desvioPadrao + '</td>')
+        tbl_resul += ('<td>' + coificiente + '%' + '</td>')
+        tbl_resul += ('</tr>')
+        tbl_resul += ('</table>')
+        document.getElementById("outResul").innerHTML = tbl_resul
+        //----------------------------------------------------------
+        //tabela Quartil
 
-
-
-        document.write('<hr>')
-        //Tabela Quartil
-        document.write('<h3 align = center>MEDIDAS SEPARATRIZES</h3>')
-        document.write('<table><br>')
-        document.write('<tr>')
-        document.write('<td>Quartil</td>' + '<td>' + 'Q1(25%)' + '</td>')
-        document.write('<td>Q2(50%)</td><td>Q3(75%)</td><td>Q4(100%)</td>')
-        document.write('</tr>')
-        document.write('<tr>')
-        document.write('<td>' + 'Q' + '</td>')
+        let tbl_quartil = ('<table><br>')
+        tbl_quartil += ('<h3 align = center>MEDIDAS SEPARATRIZES</h3>')
+        tbl_quartil += ('<tr>')
+        tbl_quartil += ('<td>Quartil</td>' + '<td>' + 'Q1(25%)' + '</td>')
+        tbl_quartil += ('<td>Q2(50%)</td><td>Q3(75%)</td><td>Q4(100%)</td>')
+        tbl_quartil += ('</tr>')
+        tbl_quartil += ('<tr>')
+        tbl_quartil += ('<td>' + 'Q' + '</td>')
         //enche a tabela
         for (let i = 25; i <= 100; i += 25) {
 
             Q = somatoriaFi * i / 100;
-            document.write('<td>' + Q + '</td>')
+            tbl_quartil += ('<td>' + Q + '</td>')
 
         }
-        document.write('</tr>')
-        document.write('</table>')
-
+        tbl_quartil += ('</tr>')
+        tbl_quartil += ('</table>')
+        document.getElementById("outQuartil").innerHTML = tbl_quartil
         //---------------------------------------------------------------------------------------
         //Tabela Quintil
-        document.write('<table><br>')
-        document.write('<tr>')
-        document.write('<td>Quintil</td>' + '<td>' + 'K1(20%)' + '</td>')
-        document.write('<td>K2(40%)</td><td>K3(60%)</td><td>K4(80%)</td><td>K5(100%)</td>')
-        document.write('</tr>')
-        document.write('<tr>')
-        document.write('<td>' + 'K' + '</td>')
+        let tbl_quintil = ('<table><br>')
+        tbl_quintil += ('<tr>')
+        tbl_quintil += ('<td>Quintil</td>' + '<td>' + 'K1(20%)' + '</td>')
+        tbl_quintil += ('<td>K2(40%)</td><td>K3(60%)</td><td>K4(80%)</td><td>K5(100%)</td>')
+        tbl_quintil += ('</tr>')
+        tbl_quintil += ('<tr>')
+        tbl_quintil += ('<td>' + 'K' + '</td>')
         let cont3 = 0
 
         for (let i = 20; i <= 100; i += 20) {
-
             Q = somatoriaFi * i / 100;
-            document.write('<td> ' + Q + '</td>')
+            tbl_quintil += ('<td> ' + Q + '</td>')
         }
-        document.write('</tr>')
-        document.write('</table>')
+
+
+        tbl_quintil += ('</table>')
+        document.getElementById("outquintil").innerHTML = tbl_quintil
         //----------------------------------------------------------------
         //Decil
-        document.write('<table><br>')
-        document.write('<tr>')
-        document.write('<td>Decil</td>' + '<td>' + 'D1(10%)' + '</td>')
-        document.write('<td>D2(20%)</td><td>D3(30%)</td><td>D4(40%)</td><td>D5(50%)</td>')
-        document.write('<td>D6(60%)</td><td>D7(70%)</td><td>D8(80%)</td><td>D9(90%)</td><td>D10(100%)</td>')
+        let tbl_decil = ('<table>')
+        tbl_decil += ('<tr>')
+        tbl_decil += ('<td>Decil</td>' + '<td>' + 'D1(10%)' + '</td>')
+        tbl_decil += ('<td>D2(20%)</td><td>D3(30%)</td><td>D4(40%)</td><td>D5(50%)</td>')
+        tbl_decil += ('<td>D6(60%)</td><td>D7(70%)</td><td>D8(80%)</td><td>D9(90%)</td><td>D10(100%)</td>')
 
-        document.write('</tr>')
-        document.write('<tr><td>' + 'D' + '</td>')
+        tbl_decil += ('</tr>')
+        tbl_decil += ('<tr><td>' + 'D' + '</td>')
         cont3 = 0;
 
         for (let i = 10; i <= 100; i += 10) {
 
-            document.write('<td>')
+            tbl_decil += ('<td>')
             Q = somatoriaFi * i / 100;
-            document.write(Q)
-            document.write('</td>')
+            tbl_decil += (Q)
+            tbl_decil += ('</td>')
         }
-        document.write('</tr>')
-        document.write('</table>')
-
+        tbl_decil += ('</tr>')
+        tbl_decil += ('</table>')
+        document.getElementById("outdecil").innerHTML = tbl_decil
+        //-------------------------------------------------------------------------
         //Tabela Porcentil
-        document.write('<br><table>')
-        document.write('<tr>')
-
-        document.write('<th>Porcentil % </th><th> P</th></  tr>')
-
-
-
+        let tbl_percentil = ('<table>')
+        tbl_percentil += ('<tr>')
+        tbl_percentil += ('<td>Porcentil % </td><td>P</td></tr><tr>')
         for (let i = 1; i <= 100; i += 1) {
             cont3 += 1
-            document.write('<tr>')
-
-
-
-            document.write('<td>')
+            tbl_percentil += ('<tr>')
+            tbl_percentil += ('<td>')
             Q = (somatoriaFi * i) / 100;
-            document.write(Q)
-            document.write('</td>')
+            tbl_percentil += (Q)
+            tbl_percentil += ('</td>')
 
-            document.write('<td>')
-            document.write('P' + cont3)
-            document.write('</td>')
+            tbl_percentil += ('<td>')
+            tbl_percentil += ('P' + cont3)
+            tbl_percentil += ('</td>')
         }
-        document.write('</tr>')
-        document.write('</table>')
+        tbl_percentil += ('</tr>')
+        tbl_percentil += ('</table>')
+        document.getElementById("outpercentil").innerHTML = tbl_percentil
+
     }
 </script>
 
@@ -469,7 +472,7 @@
     <h3>Selecione a estimação</h3>
     <form name=estimacao onchange="estima()">
         <input type="radio" name="quan" value=0 /> População <br />
-        <input type="radio" name="quan" value=1 /> amostra<br />
+        <input type="radio" name="quan" value=1 /> Amostra<br />
 
     </form>
 
@@ -477,7 +480,21 @@
     <form class="formulario-validacao" id="form">
         <input type="text" name="campo" />
         <div id="teste"></div>
-        <input type="button" NAME="submit" value="Enviar" onclick="botao(this.form),total()">
+        <button type="button" name="submit" value="Enviar" onclick="botao(this.form),total()" class="css3button">Enviar</button>
+    </form>
+    <hr>
+
+    <div id="outTabela"></div>
+    <br>
+    <div id='outResul'></div>
+    <hr>
+    <div id="outQuartil"></div>
+    <br>
+    <div id="outquintil"></div>
+    <br>
+    <div id="outdecil"></div>
+    <br>
+    <div id="outpercentil"></div>
 </body>
 
 

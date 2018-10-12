@@ -2,8 +2,6 @@
 <html>
 
 <head>
-
-
     <!-- ajuda a acentuação -->
     <meta charset="utf8">
     <div class="page-header">
@@ -12,9 +10,8 @@
 
     <style>
 
-
         .page-header {
-        background-color: #90EE90;
+        background-color:#00E676;
         margin-top: 0;
         padding: 10px 20px 20px 30px;
         border:2px solid black;
@@ -84,7 +81,6 @@
 		    0px 1px 0px rgba(255,255,255,0.3);
 }
 
-
 </style>
 </head>
 <script type="text/javascript">
@@ -106,18 +102,13 @@
 
         for (i = 0; i < document.estimacao.quan.length; i++) {
             if (document.estimacao.quan[i].checked) {
-
                 break;
             }
-
-
         }
         return est = document.estimacao.quan[i].value
     }
 
     function total() {
-
-
 
         let vetorLimpo = [] //vetor sem repetiçoes
         let cont = 0 //para contar variaveis
@@ -131,6 +122,7 @@
         function diretasort(vet) {
             let aux = 0;
             let menor = 0;
+
             for (let i = 0; i < vet.length - 1; ++i) {
                 menor = i //primeiro atribui o valor para parametro                           
                 for (let j = i + 1; j < vet.length; ++j) { // atribui j = a i mais 1
@@ -164,7 +156,6 @@
         for (let i = 0; i < vetorLimpo.length; ++i) {
             vetor[i] = Object.assign({}, obj);
             vetor[i].variavelPesquisada = vetorLimpo[i]
-
         }
         // { a: 1 }
         vetor.push(obj)
@@ -233,7 +224,6 @@
             }
             media = parseFloat((dividendo / divisor).toFixed(2));
             return (media)
-
         }
         funMedia()
         //-----------------------------------------------------------------------------
