@@ -26,10 +26,10 @@
         }
         #resultado{
         position: relative;
-        float: left;
+        float: right;
         border-width:2px;
         border:1px solid black;
-        width: 445px;
+        width:50%;
         height: 350px;
         background-color:rgb(247, 189, 83);
         }
@@ -59,8 +59,8 @@
         border:1px solid black;
 }
         #form1{
-            width: 445px;/* altura*/
-            height: 350px;/*largura*/
+            width: 49%;/* largura*/
+            height: 350px;/*altura*/
             background: rgb(93, 170, 241);
             color: rgb(5, 5, 5);
             text-align:center;
@@ -108,7 +108,7 @@
     let n=0
     let k=0
     let result=0
-
+    let vet=[]
     
     function botao(form) {
         
@@ -116,20 +116,22 @@
         sucesso = parseFloat(document.getElementById("Sucesso_S").value)
         fracasso = parseFloat(document.getElementById("Fracasso_F").value)
         k = parseInt(document.getElementById("Variavel_K").value)
-        //fracasso = form
-      //  return sucesso,fracasso,n,k
+
+        for(let i = 0; i < n; i++){vet.push(i)}
 }
     // função binomial
     let p
     let q;
-    function binomial(n,k) {
+    let PK = 0
+
+    function binomial(x,y) {//x pra n        Y pra k
         p = sucesso / (sucesso + fracasso);
         q = fracasso / (sucesso + fracasso);
-
-         result = fatorial(n) / (fatorial(k) * (fatorial(n - k)))    
-        let PK = (result * ((Math.pow(p, k))) * (Math.pow(q, (n - k)))) 
-        PK = (PK*100).toFixed(2) + '%'
-       document.getElementById("resultado").innerHTML = PK
+        result = fatorial(x) / (fatorial(y) * (fatorial(x - y))) //fatorial 
+        PK = (result * ((Math.pow(p, y))) * (Math.pow(q, (x - y)))) 
+        PK = parseFloat((PK * 100))
+        
+        console.log(PK)
     }
 
     // função fatorial
@@ -152,7 +154,33 @@
         }
 
     }
-    
+    let soma=0
+    function total(){
+        for(let i = k +1; i <= n;++i){
+           binomial(n, i)
+           soma += PK
+        }
+        
+    }
+            function casos() {
+            let opçoes = document.getElementById("cbopçoes").value
+            switch (opçoes) {
+            case "Ex_igual":
+            binomial(n,k)
+            document.getElementById("resultado").innerHTML = PK + '%'
+            break;
+
+            case "Maior_que":
+            total()
+            document.getElementById("resultado").innerHTML = soma.toFixed(2) + '%'
+            break;
+            default:
+
+}
+};
+   
+   
+    console.log(vet)
 </script>
 
 <body>
@@ -175,11 +203,14 @@
                 </p>
                 <p>
                     <select id="cbopçoes" onchange="optionCheck()">
-                        <option value="Ex_igual">Exatamente igual</option>
-                        <option value="Maior_que">Maior Que</option>
-                        <option value="Menor_que">Menor Que</option>
-                        <option value="Entre">Entre
-                        </option>
+                        <option value="Ex_igual">EXATAMENTE</option>
+                        <option value="Maior_que">MAIOR Que</option>
+                        <option value="Menor_que">MENOR Que</option>
+                        <option value="Entre">ENTRE</option>
+                        <option value="P_menos">Pelo MENOS</option>
+                        <option value="Ate">ATÉ</option>
+                        <option value="N_Minimo">No MINIMO</option>
+                        <option value="N_Maximo">No MAXIMO</option>
                     </select>
 
                     <input type="text" name="campo" id="Variavel_K" />
@@ -190,12 +221,13 @@
                         <label for="nome">Até(Max)</label>
                     </div>
                 </p>
-                <button type="button" name="submit" value="Enviar" onclick="botao(this.form),binomial(n, k)" class="css3button">Enviar</button>
+                <button type="button" name="submit" value="Enviar" onclick="botao(this.form),casos()" class="css3button">Enviar</button>
             </form>
         </div>
+
         <div id="resultado">
             <h2>Resultado:</h2>
-            PK
+            <input type="text" id='aqui' />
         </div>
     </div>
     <hr>
