@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+
+    <!-- ajuda a acentuação -->
+    <meta charset="utf8">
+    <title>Easy Statics (continua)</title>
+    <div class="page-header">
+        <h1 align=center>Easy Statics:continua</h1>
+    </div>
+    <style>
+        .page-header {
+        background-color:#00E676;
+        margin-top: 0;
+        padding: 10px 20px 20px 30px;
+        border:1px solid black;
+        text-align: center;
+        -webkit-text-stroke-width: 1px;
+        -webkit-text-stroke-color:white;
+        font-family: fantasy
+        }
+        table {
+
+                border-collapse: collapse;
+                text-align: center;
+                text-decoration: greenyellow
+            }
+
+            tr:nth-child(even) {
+                background: #d4d4d4;
+            }
+
+            th,
+            td {
+                padding: 5px 8px;
+                border: 1px solid black;
+            }
+
+            th {
+                border-bottom: 1px solid #d4d4d4;
+            }
+        </style>
+</head>
+
+<script type="text/javascript">
+    //vetor continua
+    let vet100
+
+    function botao(form) {
+        form = (form.campo.value)
+        form = form.replace(/,/g, ".")
+        console.log(form)
+        vet100 = (form.split(' ').map(Number));
+        return vet100
+    }
+
+    function estima() {
+        var i
+
+        for (i = 0; i < document.estimacao.quan.length; i++) {
+            if (document.estimacao.quan[i].checked) {
+                break;
+            }
+        }
+        return est = document.estimacao.quan[i].value
+    }
+
+    function total() {
+        let vetorLimpo = []
+        let cont = 0
+
+        let vetor = []
+        //variaveis para intevalo
+        let xmax = Math.max(...vet100); //maior valor de um vetor
+        console.log('maior numero: ' + xmax)
+        let xmin = Math.min(...vet100); //menor valor de um vetor
+        console.log('menor numero: ' + xmin)
+        let n = vet100.length // total de elementos do vetor
+
+        //--------------------------------------------------------------------------------------------
+        function diretasort(vet) {
+            console.time("Tempo de Execução Inserção Direta");
+            let aux = 0;
+            let menor = 0;
+            for (let i = 0; i < vet.length - 1; ++i) {
+                menor = i //primeiro atribui o valor para parametro                           
+                for (let j = i + 1; j < vet.length; ++j) { // atribui j = a i mais 1
+                    if (vet[menor] > vet[j]) { //compara as posiçoes
+                        menor = j //atribui o indice para troca                    
+                    }
+                }
+                aux = vet[menor]
+                vet[menor] = vet[i] //troca o menor valor
+                vet[i] = aux //troca o maior valor
+                //limpa vetor
+            }
+            console.log(vet)
+
+            console.timeEnd("Tempo de Execução Inserção Direta");
+        }
+
+
+        //-----------------------------------------------------------
+        //chama funçar organizar
+        diretasort(vet100)
+
+        //--formula para continua----------------------------------------------
+        let at = 0
+        let ic = 0
+
+        function intervaloClasse() {
+            at = xmax - xmin;
+
+            if (xmin !== 0) {
+                k = Math.floor(Math.sqrt(n));
+
+            } else {
+
+                k = Math.floor(Math.sqrt(n)) - 1;
+                console.log('vet' + k)
+            }
+            // k = parseInt(Math.round((Math.sqrt(n))));
+
+            let vetk = [k - 1, k, k + 1]
+            console.log('k: ' + vetk)
+
+            while (ic == 0) {
+                at += 1;
+
+                for (let i = 0; i < vetk.length; i++) {
+
+                    if (at % vetk[i] == 0) {
+                        ic = at / vetk[i];
+                        k = vetk[i]
+                        break;
+                    }
+                }
+
+            }
+        }
+
+        intervaloClasse()
+        console.log('intervalo de classe:' + ic)
+
+        //---------------------------------------------------------
+        //-- clonar objeto
+        let obj = {
+            PontoMedio: '',
+            frequencia: '',
+            frequenciaPor: '',
+            fac: '',
+            classe: '',
+            limMinimo: '',
+            limMaximo: ''
+
+        }
+        let aux4 = xmin
+        let total = []
+
+        for (let i = 0; i < k; ++i) {
+            vetor[i] = Object.assign({}, obj);
+            total.push(aux4 += ic) //atribui o limito maximo
+
+            vetor[i].limMaximo = total[i] //atribui o valor para o limite maximo
+            vetor[i].limMinimo = vetor[i].limMaximo - ic // atribui o valor para o limite minimo
+            vetorLimpo[i] = vetor[i].limMaximo //atribui para parametro
+            vetor[i].PontoMedio = (vetor[i].limMinimo + vetor[i].limMaximo) / 2 // ponto medio da classe
+
+
+        }; // { a: 1 }
+        vetor.push(obj)
+
+        //-----------------------------------------------------------------
+        aux4 = xmin
+
+        //joga frequencia
+        for (let x = 0; x < vetor.length - 1; x++) {
+
+            cont = 0
+
+            for (let y = vet100.length; y >= 0; y--) {
+
+                if ((vet100[y] < vetor[x].limMaximo) && (vet100[y] >= vetor[x].limMinimo)) {
+                    cont++;
+                }
+
+            }
+
+            // jo NO OBJO
+            vetor[x].frequencia = cont
+
+        }
+
+        //-------------------------------------------------------------
+        //frequencia acumulada
+        let vet3 = []
+        let aux = 0
+
+        function fac() {
+            vet3[0] = vetor[0].frequencia
+            aux = vetor[0].frequencia
+
+            for (var x = 0; x < vetorLimpo.length; x++) {
+
+                aux += vetor[x + 1].frequencia;
+
+                vet3[x + 1] = aux
+                vetor[x].fac = vet3[x]
+            }
+        }
+        fac()
+        let moda = 0
+        //---------------------------------------------------------------------
+        //calcula a moda
+
+        function funModa() {
+
+            maior = vetor[0].frequencia
+
+            for (let i = 0; i < vetor.length; ++i) {
+                // ignorar propriedades herdadas
+
+                if (vetor[i].frequencia >= maior) {
+                    maior = vetor[i].frequencia;
+                    moda = vetor[i].PontoMedio //acha o ponto medio
+                }
+            }
+        }
+        funModa() //chama funçao moda
+        //----------------------------------------------------------------
+        // Calcular a Média
+        let media = 0;
+
+        function funMedia() {
+
+            let divisor = 0;
+            let dividendo = 0;
+
+            for (let i = 0; i < vetor.length; i++) {
+                dividendo += vetor[i].PontoMedio * vetor[i].frequencia;
+                divisor += vetor[i].frequencia;
+            }
+            media = (dividendo / divisor);
+
+            return media;
+
+        }
+        funMedia()
+        //-----------------------------------------------------------------------------
+        // Calcular Mediana
+        // pode dar erro aki
+        let mediana = 0;
+        let aux5 = 0
+
+        let aux6 = 0
+
+        function funMediana() {
+            aux5 = vet100.length / 2;
+
+            // Verifica a posião 
+            for (let i = 0; i <= vetor.length; i++) {
+
+                aux6 = vetor[i].fac
+
+                if (vetor[0].fac >= aux5) {
+                    aux6 = 0
+                    mediana = ((vetor[i].limMinimo + ((aux5 - aux6) / vetor[i].frequencia) * ic))
+                    mediana = ((mediana).toFixed(2))
+
+                    console.log(mediana)
+                    break
+
+                }
+
+                if (aux5 < vetor[i].fac) {
+
+                    mediana = ((vetor[i].limMinimo + ((aux5 - aux6) / vetor[i].frequencia) * ic))
+                    mediana = ((mediana).toFixed(2))
+                    break;
+                }
+
+            }
+
+            return mediana;
+        }
+        funMediana()
+        //-----------------------------------------------------------------
+        //desvio padrao
+        let coificiente = 0
+        let desvioPadrao = 0
+        let aux2 = 0
+        let aux3 = 0
+
+        function funDesvio() {
+            for (let i = 0; i < vetor.length; ++i) {
+                aux2 = vetor[i].PontoMedio - media // tira a media da variavel
+                //desvio padrao recebe frequencia - media elevado ao quadrado
+                desvioPadrao += (Math.pow(aux2, 2) * vetor[i].frequencia)
+                console.log(desvioPadrao)
+
+            }
+            //--------------------------------alerta--------------------------------------------------------
+            //se for popula tira o menos 1
+            aux3 = desvioPadrao / (aux - est) //auxiliar para receber o desvio
+            desvioPadrao = (Math.sqrt(aux3))
+            //--------------------------------------------------------------
+            //coificiente padrao
+            coificiente = Math.round((desvioPadrao / media) * 100)
+        }
+        funDesvio() //chama funçao desvio padrao 
+        //chama funçao
+        //----------------------------------------------
+        //CALCULA A O TOTAL DE fi
+        let somatoriaFi = 0;
+
+        function somaFi() {
+            for (let i = 0; i < vetor.length; i++) {
+                somatoriaFi += vetor[i].frequencia
+            }
+            return somatoriaFi
+        }
+
+        //Medidas separatrizes
+        let Q = 0
+
+        let param;
+
+        somaFi();
+
+        //--------------------------------------------------------------------
+        let tbl_tabela = ('<table align=center>')
+        tbl_tabela += ('<h3 align = center>TABELA</h3>')
+        tbl_tabela += ('<tr>')
+        tbl_tabela += (
+            '<td>Classe</td><td>Intervalo de Classe</td><td>Frequencia(fi)</td><td>Frequencia%</td><td>Frequencia Acumulada</td>'
+        )
+        tbl_tabela += ('</tr>')
+
+        let contClasses = 1
+
+        for (let linha = 0; linha < k; ++linha) {
+            tbl_tabela += ('<tr>')
+            //primeira coluna classe
+            tbl_tabela += ('<td>' + contClasses + '</td>')
+            vetor[linha].classe = contClasses
+            //segunda coluna intervalo de classe
+            tbl_tabela += ('<td>' + xmin + ' |--- ' + (xmin += ic) + '</td>')
+            //terceira coluna
+            tbl_tabela += ('<td>' + vetor[linha].frequencia + '</td>')
+            //quarta coluna
+            tbl_tabela += ('<td>' + Math.round((vetor[linha].frequencia / vet100.length) * 100) + '%' + '</td>')
+            //
+            vetor[linha].frequenciaPor = Math.round((vetor[linha].frequencia / vet100.length) * 100) + '%'
+            //quarta coluna
+            tbl_tabela += ('<td>' + parseInt((vetor[linha].fac)) + '</td>')
+            //quarta coluna
+
+            tbl_tabela += ('</tr>')
+            contClasses++
+        }
+        tbl_tabela += ('</table>')
+        document.getElementById("outTabela").innerHTML = tbl_tabela
+        //---------------------------------------------------------------------------
+        //resultados
+        let tbl_resul = ('<table align = center>')
+        tbl_resul += ('<h3 align = center>RESULTADOS</h3>')
+        tbl_resul += ('<tr>')
+        tbl_resul += (
+            '<td>Media(x)</td><td>Moda(Mo)</td><td>Mediana(Md)</td><td>Desvio Padrao(dx)</td><td>Coificiente Padrão</td>'
+        )
+        tbl_resul += ('</tr>') //primeira linha
+        tbl_resul += ('<tr>')
+        //primeira coluna
+        tbl_resul += ('<td>' + media + '</td><td>' + moda + '</td>')
+        //terceira coluna
+        tbl_resul += ('<td>' + mediana + '</td>')
+        //quarta coluna
+        tbl_resul += ('<td>' + desvioPadrao + '</td>')
+        tbl_resul += ('<td>' + coificiente + '%' + '</td>')
+        tbl_resul += ('</tr>')
+        tbl_resul += ('</table>')
+        document.getElementById("outResul").innerHTML = tbl_resul
+        //----------------------------------------------------------
+        //tabela Quartil
+
+        let tbl_quartil = ('<table><br>')
+        tbl_quartil += ('<h3 align = center>MEDIDAS SEPARATRIZES</h3>')
+        tbl_quartil += ('<tr>')
+        tbl_quartil += ('<td>Quartil</td>' + '<td>' + 'Q1(25%)' + '</td>')
+        tbl_quartil += ('<td>Q2(50%)</td><td>Q3(75%)</td><td>Q4(100%)</td>')
+        tbl_quartil += ('</tr>')
+        tbl_quartil += ('<tr>')
+        tbl_quartil += ('<td>' + 'Q' + '</td>')
+        //enche a tabela
+        for (let i = 25; i <= 100; i += 25) {
+
+            Q = somatoriaFi * i / 100;
+            tbl_quartil += ('<td>' + Q + '</td>')
+
+        }
+        tbl_quartil += ('</tr>')
+        tbl_quartil += ('</table>')
+        document.getElementById("outQuartil").innerHTML = tbl_quartil
+        //---------------------------------------------------------------------------------------
+        //Tabela Quintil
+        let tbl_quintil = ('<table><br>')
+        tbl_quintil += ('<tr>')
+        tbl_quintil += ('<td>Quintil</td>' + '<td>' + 'K1(20%)' + '</td>')
+        tbl_quintil += ('<td>K2(40%)</td><td>K3(60%)</td><td>K4(80%)</td><td>K5(100%)</td>')
+        tbl_quintil += ('</tr>')
+        tbl_quintil += ('<tr>')
+        tbl_quintil += ('<td>' + 'K' + '</td>')
+        let cont3 = 0
+
+        for (let i = 20; i <= 100; i += 20) {
+            Q = somatoriaFi * i / 100;
+            tbl_quintil += ('<td> ' + Q + '</td>')
+        }
+
+
+        tbl_quintil += ('</table>')
+        document.getElementById("outquintil").innerHTML = tbl_quintil
+        //----------------------------------------------------------------
+        //Decil
+        let tbl_decil = ('<table>')
+        tbl_decil += ('<tr>')
+        tbl_decil += ('<td>Decil</td>' + '<td>' + 'D1(10%)' + '</td>')
+        tbl_decil += ('<td>D2(20%)</td><td>D3(30%)</td><td>D4(40%)</td><td>D5(50%)</td>')
+        tbl_decil += ('<td>D6(60%)</td><td>D7(70%)</td><td>D8(80%)</td><td>D9(90%)</td><td>D10(100%)</td>')
+
+        tbl_decil += ('</tr>')
+        tbl_decil += ('<tr><td>' + 'D' + '</td>')
+        cont3 = 0;
+
+        for (let i = 10; i <= 100; i += 10) {
+
+            tbl_decil += ('<td>')
+            Q = somatoriaFi * i / 100;
+            tbl_decil += (Q)
+            tbl_decil += ('</td>')
+        }
+        tbl_decil += ('</tr>')
+        tbl_decil += ('</table>')
+        document.getElementById("outdecil").innerHTML = tbl_decil
+        //-------------------------------------------------------------------------
+        //Tabela Porcentil
+        let tbl_percentil = ('<table>')
+        tbl_percentil += ('<tr>')
+        tbl_percentil += ('<td>Porcentil % </td><td>P</td></tr><tr>')
+        for (let i = 1; i <= 100; i += 1) {
+            cont3 += 1
+            tbl_percentil += ('<tr>')
+            tbl_percentil += ('<td>')
+            Q = (somatoriaFi * i) / 100;
+            tbl_percentil += (Q)
+            tbl_percentil += ('</td>')
+
+            tbl_percentil += ('<td>')
+            tbl_percentil += ('P' + cont3)
+            tbl_percentil += ('</td>')
+        }
+        tbl_percentil += ('</tr>')
+        tbl_percentil += ('</table>')
+        document.getElementById("outpercentil").innerHTML = tbl_percentil
+
+    }
+</script>
+
+<body>
+    <h3>Selecione a estimação</h3>
+    <form name=estimacao onchange="estima()">
+        <input type="radio" name="quan" value=0 /> População <br />
+        <input type="radio" name="quan" value=1 /> Amostra<br />
+
+    </form>
+
+    <h3>Digite os dados</h3>
+    <form class="formulario-validacao" id="form">
+        <input type="text" name="campo" />
+        <div id="teste"></div>
+        <button type="button" name="submit" value="Enviar" onclick="botao(this.form),total()" class="css3button">Enviar</button>
+    </form>
+    <hr>
+
+    <div id="outTabela"></div>
+    <br>
+    <div id='outResul'></div>
+    <hr>
+    <div id="outQuartil"></div>
+    <br>
+    <div id="outquintil"></div>
+    <br>
+    <div id="outdecil"></div>
+    <br>
+    <div id="outpercentil"></div>
+</body>
+
+
+</html>

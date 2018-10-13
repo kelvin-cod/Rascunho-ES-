@@ -5,7 +5,7 @@
 
 <body>
     <!-- ajuda a acentuação -->
-    <meta charset="utf8" >
+    <meta charset="utf8">
     <title>Easy Statics</title>
     <h1 align="center">Easy Statics</h1>
     <div class="container">
@@ -260,14 +260,14 @@
             '<td>Variavel Pesquisada(xi)</td><td>Frequencia(fi)</td><td>Frequencia%(fi%)</td><td>Frequencia Acumulada</td><td>Fac %</td>'
         )
         document.write('</tr>') //primeira linha
-let totalfac =0
+        let totalfac = 0
         for (let linha = 0; linha < vetorLimpo.length; ++linha) {
             vetor[linha].frequenciaPor = Math.round((vetor[linha].frequencia / vet100.length) * 100)
-            
+
             vetor[linha].facPorcentagem += Math.round((vetor[linha].fac / vet100.length) * 100)
             totalfac = Math.round(vetor[linha].facPorcentagem)
-            
-              document.write('<tr>')
+
+            document.write('<tr>')
             //primeira coluna
             document.write('<td>' + vetorLimpo[linha] + '</td><td>' + vetor[linha].frequencia + '</td>')
             //terceira coluna
@@ -277,16 +277,16 @@ let totalfac =0
 
             //quarta coluna
             document.write('<td>' + parseInt((vetor[linha].fac)) + '</td>')
-           
+
 
             //coluna fac porcentagem
             document.write('<td>' + (vetor[linha].facPorcentagem) + '%' + '</td>')
             document.write('</tr>')
         }
-        document.write('<td>' + 'Total' + '</td>' +'<td>' + vet100.length + '</td>')
-        document.write('<td>' + totalfac +'%' + '</td>' +'<td>' + vet100.length + '</td>')
+        document.write('<td>' + 'Total' + '</td>' + '<td>' + vet100.length + '</td>')
+        document.write('<td>' + totalfac + '%' + '</td>' + '<td>' + vet100.length + '</td>')
         document.write('</table><br>')
-        
+
         document.write('<hr>')
         //----------------------------------------------------------------------------------------
         //cria grafico
