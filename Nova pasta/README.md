@@ -6,12 +6,6 @@
 
 ![Thumbnail of Cayman](thumbnail.png)
 
-## Usage
-
-To use the Cayman theme:
-
-1. Add the following to your site's `_config.yml`:
-
     ```yml
     theme: jekyll-theme-cayman
     ```
@@ -43,17 +37,6 @@ google_analytics: [Your Google Analytics tracking ID]
 ### Stylesheet
 
 If you'd like to add your own custom styles:
-
-1. Create a file called `/assets/css/style.scss` in your site
-2. Add the following content to the top of the file, exactly as shown:
-    ```scss
-    ---
-    ---
-
-    @import "{{ site.theme }}";
-    ```
-3. Add any custom CSS (or Sass, including imports) you'd like immediately after the `@import` line
-
 *Note: If you'd like to change the theme's Sass variables, you must set new values before the `@import` line in your stylesheet.*
 
 ### Layouts
