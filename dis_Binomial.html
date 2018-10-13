@@ -45,18 +45,20 @@
             text-anchor: start;
             font-weight: bold;
             text-align:inherit;
-            position:relative;
+            position: relative;
             align-items: center
         }
         input{
             width: 45px;
            border:1px solid black;
-           font-weight: bold
+           font-weight: bold;
+position: relative;
+
            ;
         }
         hr{
             position: relative;
-            float:right
+            float:left
             ;
         }
         #cbopçoes,#resultado{
@@ -65,7 +67,7 @@
         text-align:center;
         position: relative;
         border:1px solid black;
-      
+        
 }
 embed {
 max-width: 100%;
@@ -77,11 +79,10 @@ max-width: 100%;
             color: rgb(5, 5, 5);
             text-align:center;
             position: relative;
-            float: left;
             border:1px solid black;
         }
             button.css3button {
-           
+           position: relative;
             font-family: Arial, Helvetica, sans-serif;
             font-size: 14px;
             color: black;
@@ -191,7 +192,7 @@ max-width: 100%;
 
             case "Ex_igual":
             binomial(n,k)//passa o parametro normal
-           resposta = ('<h2>' + 'Resultado:' +
+            resposta = ('<h2>' + 'Resultado:' + '<br>'+
                 PK.toFixed(2) + '%'+ '</h2>')
 
             document.getElementById("resultado").innerHTML = resposta
@@ -199,7 +200,7 @@ max-width: 100%;
 //------------------------------------------------------------
             case "Maior_que"://caso maior que
             total(k + 1, n)//nesse caso vai de k +1 ate o final
-             resposta = ('<h2>' + 'Resultado:' +
+            resposta = ('<h2>' + 'Resultado:' + '<br>'+
             soma.toFixed(2) + '%'+ '</h2>')
 
            //saida
@@ -208,7 +209,7 @@ max-width: 100%;
 //-----------------------------------------------------------------
             case "Menor_que":
             total(0, k - 1)//passa o parametro 0 como inicial ate k -1
-           resposta = ('<h2>' + 'Resultado:' +
+            resposta = ('<h2>' + 'Resultado:' + '<br>'+
              soma.toFixed(2) + '%'+ '</h2>')
 
             document.getElementById("resultado").innerHTML = resposta
@@ -216,14 +217,14 @@ max-width: 100%;
 //-------------------------------------------------------------------
             case "P_menos":
             total(k, n)//passa o parametro k como inicial, ate n
-                resposta = ('<h2>' + 'Resultado:' +
+            resposta = ('<h2>' + 'Resultado:' + '<br>'+
                 soma.toFixed(2) + '%'+ '</h2>')
 
             document.getElementById("resultado").innerHTML = resposta
 //-----------------------------------------------------------------------
             case "Ate":
             total(0, k)//passa o parametro 0 como inicial ate k
-            resposta = ('<h2>' + 'Resultado:' +
+            resposta = ('<h2>' + 'Resultado:' + '<br>'+
             soma.toFixed(2) + '%'+ '</h2>')
 
             document.getElementById("resultado").innerHTML = resposta
@@ -231,7 +232,7 @@ max-width: 100%;
 //-----------------------------------------------------------------------
             case "N_Minimo":
             total(k, n)//passa o parametro 0 como inicial ate k
-            resposta = ('<h2>' + 'Resultado:' +
+            resposta = ('<h2>' + 'Resultado:' + '<br>'+
              soma.toFixed(2) + '%'+ '</h2>')
 
             document.getElementById("resultado").innerHTML = resposta
@@ -239,7 +240,7 @@ max-width: 100%;
 //-------------------------------------------------------------------------
             case "N_Maximo":
             total(0, k)//passa o parametro 0 como inicial ate k
-            resposta = ('<h2>' + 'Resultado:' +
+            resposta = ('<h2>' + 'Resultado:' +'<br>'+
               soma.toFixed(2) + '%'+ '</h2>')
 
             document.getElementById("resultado").innerHTML = resposta
@@ -248,7 +249,7 @@ max-width: 100%;
             case "Entre":
             let maximo = document.getElementById("maior").value
             total(k, maximo)//passa o parametro 0 como inicial ate k
-            resposta = ('<h2>' + 'Resultado:' +
+            resposta = ('<h2>' + 'Resultado:' + '<br>'+
             soma.toFixed(2) + '%'+ '</h2>')
             document.getElementById("resultado").innerHTML = resposta
             break;
