@@ -7,11 +7,26 @@
     <div class="page-header">
         <h1>Easy Statics: MENU</h1>
     </div>
+    <div class="Selecione">
+        <h2>Selecione uma opção:</h2>
+    </div>
     <style>
+        .Selecione {
+            background-color: rgb(93, 170, 241);
+            margin-top: 0;
+            /* padding: 10px 20px 20px 30px;*/
+            border: 1px solid black;
+            text-align: center;
+            -webkit-text-stroke-width: 1px;
+            -webkit-text-stroke-color: #ffffff;
+            font-family: Impact;
+            position: relative;
+        }
+
         .page-header {
             background-color: #00E676;
             margin-top: 0;
-            padding: 10px 20px 20px 30px;
+            padding: 10px 20px 10px 10px;
             border: 1px solid black;
             text-align: center;
             -webkit-text-stroke-width: 1px;
@@ -20,25 +35,59 @@
             position: relative;
 
         }
+
+        #geral {
+            -webkit-text-stroke: #000000;
+            font-weight: bold;
+        }
+
+        button {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 14px;
+            color: black;
+            padding: 10px 20px;
+            background: -moz-linear-gradient(top,
+                #19fa05 0%,
+                #54c3ff);
+            background: -webkit-gradient(linear, left top, left bottom,
+                from(#00E676),
+                to(#00E676));
+            -moz-border-radius: 6px;
+            -webkit-border-radius: 6px;
+            border-radius: 6px;
+            border: 1px solid #000000;
+            -moz-box-shadow:
+                0px 1px 3px rgba(000, 000, 000, 0.5),
+                inset 0px 0px 1px rgba(255, 255, 255, 1);
+            -webkit-box-shadow:
+                0px 1px 3px rgba(000, 000, 000, 0.5),
+                inset 0px 0px 1px rgba(255, 255, 255, 1);
+            box-shadow:
+                0px 1px 3px rgba(000, 000, 000, 0.5),
+                inset 0px 0px 1px rgba(255, 255, 255, 1);
+            text-shadow:
+                0px -1px 0px rgba(000, 000, 000, 0.7),
+                0px 1px 0px rgba(255, 255, 255, 0.3);
+        }
     </style>
 </head>
 
 
 <body>
-    <h2 align="center">Selecione uma opção</h2>
+
     <br>
-    <div align="center">
-        <label for="discreta" onclick="D_creta()">Discreta</label>
-        <button id="Discreta">Acessar</button> <br>
+    <div align="center" id="geral">
+        <label for="discreta">Discreta</label>
+        <button id="Discreta" onclick="D_creta()"">Acessar</button> <br>
         <br>
-        <label for="continua">Continua</label>
-        <button id="Continua" onclick="C_tinua()">Acessar</button> <br>
-        <br>
-        <label for="qualitativa">Qualitativa</label>
-        <button id="Qualitativa" onclick="Q_tativa()">Acessar</button> <br>
-        <br>
-        <label for="binomial">Binomial</label>
-        <button id="Binomial" onclick="B_nomial()">Acessar</button> <br>
+        <label for=" continua">Continua</label>
+            <button id="Continua" onclick="C_tinua()">Acessar</button> <br>
+            <br>
+            <label for="qualitativa">Qualitativa</label>
+            <button id="Qualitativa" onclick="Q_tativa()">Acessar</button> <br>
+            <br>
+            <label for="binomial">Binomial</label>
+            <button id="Binomial" onclick="B_nomial()">Acessar</button> <br>
     </div>
 </body>
 <script>
