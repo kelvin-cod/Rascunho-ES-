@@ -98,17 +98,20 @@
         let numero2
         let numero3
         let array
+        let Zero
 
         function botao(form) {
             //   let num = document.getElementById("formu")
             form = document.getElementById('input').value
-            console.log(form)
             //  let texto = num.toString()
             let vet = (form.split('').map(Number)) // divide o numero em um vetor
-            numero2 = parseFloat(vet[0] + '.' + vet[2]) //concatena o numero em 2 casas
-            if (numero2 > 3.9) {
+            //--------------------------------------------------------------
+
+            numero2 = parseFloat(vet[0] + '.' + vet[2]).toFixed(2) //concatena o numero em 2 casas
+            if ((numero2 > 3.9) || (numero2 < 0)) {
                 alert("Numero Invalido")
             }
+            //---------------------------------------------------
             if (vet.length == 3) {
                 numero3 = 0
             } else if (vet.length == 4) {
@@ -137,18 +140,20 @@
                 }
             }
             for (let i = 0; i < id.length; i++) {
+
                 if (casa2 == vetor[i].Linha) {
                     let resul = (vetor[i].Numero)
                     form.resultado.value = resul;
                 }
             }
+
         }
         // achar(numero3, numero2)
     </script>
 </body>
 <h3>Digite o numero entre (0 : 3.9)</h3>
 <form class="formulario-validacao" id="form"">
-    <input type=" text" id="input" name="campo" onchange="botao(this.form),achar(numero3, numero2)" />
+    <input type=" text" id="input" name="campo" />
 <div id="teste"></div>
 <input type="button" NAME="submit" value="Enviar" onclick="botao(this.form),achar(numero3, numero2)">
 
