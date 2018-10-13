@@ -107,7 +107,7 @@
             let vet = (form.split('').map(Number)) // divide o numero em um vetor
             //--------------------------------------------------------------
 
-            numero2 = parseFloat(vet[0] + '.' + vet[2]).toFixed(2) //concatena o numero em 2 casas
+            numero2 = parseFloat(vet[0] + '.' + vet[2]) //concatena o numero em 2 casas
             if ((numero2 > 3.9) || (numero2 < 0)) {
                 alert("Numero Invalido")
             }
