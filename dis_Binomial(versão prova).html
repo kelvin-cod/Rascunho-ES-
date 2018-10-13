@@ -70,7 +70,7 @@
             border:1px solid black;
         }
             button.css3button {
-            position: relative;
+           
             font-family: Arial, Helvetica, sans-serif;
             font-size: 14px;
             color: black;
@@ -110,13 +110,18 @@
     let k=0
     let result=0
     let vet=[]
-    
+    function converter(a, b){
+        a = a / 100
+        b= b /100
+        return a, b
+    }
     function botao(form) {
         
         n = parseInt(document.getElementById("Total_N").value)
         sucesso = parseFloat(document.getElementById("Sucesso_S").value)
         fracasso = parseFloat(document.getElementById("Fracasso_F").value)
         k = parseInt(document.getElementById("Variavel_K").value)
+        converter(sucesso, fracasso)
 
         for(let i = 0; i < n; i++){vet.push(i)}
 }
