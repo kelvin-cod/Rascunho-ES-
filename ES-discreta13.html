@@ -29,7 +29,12 @@
         -webkit-text-stroke-color: #000000;
         font-family: fantasy
         }
-
+        .tabela1{
+            width: 69%;
+            float: left;
+            border:2px solid black;
+height: 350px;
+        }
         h1 {
             color:white;
             font-size: 50px;
@@ -37,13 +42,23 @@
         body {
                background-color:whitesmoke
         }
+              #formu{
+             position: relative;
+            float: left;
+            border-width:2px;
+            border:1px solid black;
+            width:30%;
+            height: 350px;
+            background-color:rgb(247, 189, 83);
+            text-align: center
+            }
         table {
                 border-collapse: collapse;
                 text-align: center;
                 position: relative;
                 font-weight: bold;
                 align-items: center;
-                width:100%;
+                width:70%;
                     }
         
                     tr:nth-child(even) {
@@ -335,7 +350,7 @@
         document.getElementById("outputDiv").innerHTML = HTML; //atribui no div
         //-------------------------------------------------------------------------
         //resultados------------------------------------------------------------------
-        var tbl_resul = '<table align=center><tr>';
+        var tbl_resul = "<table align=center > <tr>";
         tbl_resul += ('<h3 align = center>RESULTADOS</h3>')
         tbl_resul += ('<table align = center class="tabela">')
         tbl_resul += ('<tr>')
@@ -438,8 +453,9 @@
 </script>
 
 <body>
-    <h3>Selecione a estimação</h3>
+
     <div id="formu">
+        <h3>Selecione a estimação</h3>
         <form name="estimacao" onchange="estima()">
             <input type="radio" name="quan" value=0 /> População <br />
             <input type="radio" name="quan" value=1 /> amostra<br />
@@ -451,12 +467,12 @@
             <button type="button" name="submit" value="Enviar" onclick="botao(this.form),total()" class="css3button">Enviar</button>
         </form>
     </div>
+
+    <div id="outresultado" class='tabela1'></div>
     <br>
-    <hr>
     <div id="outputDiv"></div>
     <br>
-    <div id="outresultado"></div>
-    <br>
+
     <hr>
     <div id="outquartil"></div>
     <br>
