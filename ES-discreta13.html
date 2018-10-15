@@ -16,13 +16,13 @@
         .voltar{
             background-color:rgb(91, 94, 245);
             margin-top: 0;
-            padding: 10px 20px 20px 30px;
+            padding: 20px 20px 20px 30px;
             border:1px solid black;
         }
         .page-header {
         background-color:#00E676;
         margin-top: 0;
-        padding: 10px 20px 20px 30px;
+        padding: 10px 10px 20px 30px;
         border:2px solid black;
         text-align: center;
         -webkit-text-stroke-width: 1px;
@@ -43,8 +43,8 @@
         body {
                background-color:whitesmoke
         }
-              #formu{
-             position: relative;
+            #formu{
+            position: relative;
             float: left;
             border-width:2px;
             border:2px solid black;
@@ -74,7 +74,6 @@
                     }
         
                     th {
-                        
                         border-bottom: 1px solid white;
                     }
             button {
@@ -108,7 +107,29 @@
             0px -1px 0px rgba(000,000,000,0.7),
             0px 1px 0px rgba(255,255,255,0.3);
             }
-
+            input.radio{
+                background:#ffffff;
+                border-radius:8px;
+            }
+            textarea{
+            border: 1px solid #000000;
+            background:#ffffff;
+            width:80%;
+            height:110px;
+            border-radius:4px;
+            -moz-border-radius:4px;
+            -webkit-border-radius:4px;
+            box-shadow: 1px 1px 2px #333333;
+            -moz-box-shadow: 1px 1px 2px #333333;
+            -webkit-box-shadow: 1px 1px 2px #333333;
+            resize: none;
+            font-weight: bold;
+            font-size: 15px
+            }
+            
+            input[type=text]:hover, textarea:hover{
+            background: #ffffff; border:1px solid #990000;
+            }
 </style>
 </head>
 <script type="text/javascript">
@@ -182,6 +203,7 @@
             frequenciaPor: '',
             fac: '',
             facPorcentagem: '',
+            somaVariavel: ''
         }
         // atribui o objeto para as copias
         for (let i = 0; i < vetorLimpo.length; ++i) {
@@ -313,16 +335,16 @@
         function somaFi() {
             for (let i = 0; i < vetor.length; i++) {
                 somatoriaFi += vetor[i].variavelPesquisada;
+                vetor[i].somaVariavel = somatoriaFi
             }
             return somatoriaFi
         }
-
+        somaFi();
+        console.log(vetor)
         //Medidas separatrizes
         let Q = 0
         let k = 0
         let param;
-
-        somaFi();
         //-------------------------------------------------------------------
         //cria 1 tabela
         var HTML = "<table align=center><tr>";
@@ -346,7 +368,8 @@
             //coluna fac porcentagem
             HTML += '<td>' + (vetor[linha].facPorcentagem) + '%' + '</td>'
         }
-        HTML += ('<tr><td text="bold">' + 'Total' + '</td>' + '<td>' + vet100.length + '</td>')
+        HTML += ('<tr><td text="bold">' + 'Total: ' + vetor[vetor.length - 1].somaVariavel + '</td>' + '<td>' + vet100.length +
+            '</td>')
         HTML += ('<td>' + totalfac + '%' + '</td>' + '<td>' + vet100.length + '</td><td>' + " " + '</td>')
         HTML += "</tr></table>"; //fecha tabela
         document.getElementById("outputDiv").innerHTML = HTML; //atribui no div
@@ -457,15 +480,18 @@
 <body>
 
     <div id="formu">
-        <h3>Selecione a estimação</h3>
+        <h2>Selecione a Estimação:</h2>
         <form name="estimacao" onchange="estima()">
-            <input type="radio" name="quan" value=0 /> População <br />
-            <input type="radio" name="quan" value=1 /> amostra<br />
+            <input type="radio" name="quan" value=0 class="bolinha" autofocus />População<br />
+            <input type="radio" name="quan" value=1 class="bolinha" /> Amostra <br />
         </form>
-        <br>
-        <h3>Digite os dados</h3>
+        <h2>Digite os Dados:</h2>
         <form class="formulario-validacao" id="form">
-            <input type="text" name="campo" id="input" />
+            <!-- <input type="text" name="scampo" id="sinput" /> -->
+            <textarea type="text" id='input' name="campo" autocomplete="off" placeholder="DIGITE OS NUMEROS COM ESPAÇOS EX: 10 20 30 40
+            "></textarea>
+            <br>
+
             <button type="button" name="submit" value="Enviar" onclick="botao(this.form),total()" class="css3button">Enviar</button>
         </form>
     </div>
@@ -483,6 +509,7 @@
     <div id="outdecil"></div>
     <br>
     <div id="outpercentil"></div>
+    <div id="footer"></div>
 </body>
 
 </html>
