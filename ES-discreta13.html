@@ -409,24 +409,17 @@
         tbl_quartil += ('<td>' + 'Q' + '</td>')
         //enche a tabela
         let quartil = 25 // variavel para quartil
-
         while (quartil <= 100) {
-
             // calculo porcentagem
             for (let j = 0; j < vetor.length - 1; ++j) {
                 Q = (somatoriaFi * quartil) / 100;
                 console.log(Q)
                 if (Q <= vetor[j].somaVariavel) { //pesquisa o objeto e acha o lugar
                     tbl_quartil += ('<td>' + '(' + Q + ')' + vetor[j].posiçao + "ºPosição" + '</td>');
-                    quartil += 25
-
+                    quartil += 25 // incremento no quartil
                 }
-
             }
-
-            // incremento no quartil
         }
-
         tbl_quartil += ('</tr>')
         tbl_quartil += ('</table>')
         document.getElementById("outquartil").innerHTML = tbl_quartil; //atribui no div
@@ -440,11 +433,18 @@
         tbl_quintil += ('<tr>')
         tbl_quintil += ('<td>' + 'K' + '</td>')
         let cont3 = 0
-
-        for (let i = 20; i <= 100; i += 20) {
-            Q = somatoriaFi * i / 100;
-            tbl_quintil += ('<td> ' + Q + '</td>')
+        Q = 0
+        let quintil = 20;
+        while (quintil <= 100) { // calculo porcentagem 
+            for (let j = 0; j < vetor.length - 1; ++j) {
+                Q = (somatoriaFi * quintil) / 100;
+                if (Q <= vetor[j].somaVariavel) { //pesquisa o objeto e acha o lugar 
+                    tbl_quintil += ('<td>' + '(' + Q + ')' + vetor[j].posiçao + "ºPosição" + '</td>');
+                    quintil += 20 // incremento no quintil
+                }
+            }
         }
+
         tbl_quintil += ('</tr></table>')
         document.getElementById("outquintil").innerHTML = tbl_quintil
         //-----------------------------------------------------------------------------------
@@ -458,14 +458,18 @@
         tbl_decil += ('</tr>')
         tbl_decil += ('<tr><td>' + 'D' + '</td>')
         cont3 = 0;
-
-        for (let i = 10; i <= 100; i += 10) {
-
-            tbl_decil += ('<td>')
-            Q = somatoriaFi * i / 100;
-            tbl_decil += (Q)
-            tbl_decil += ('</td>')
+        let decil = 10
+        Q = 0
+        while (decil <= 100) { // calculo porcentagem 
+            for (let j = 0; j < vetor.length - 1; ++j) {
+                Q = (somatoriaFi * decil) / 100;
+                if (Q <= vetor[j].somaVariavel) { //pesquisa o objeto e acha o lugar 
+                    tbl_decil += ('<td>' + '(' + Q + ')' + vetor[j].posiçao + "ºPosição" + '</td>');
+                    decil += 10 // incremento no quintil
+                }
+            }
         }
+
         tbl_decil += ('</tr>')
         tbl_decil += ('</table>')
         document.getElementById("outdecil").innerHTML = tbl_decil
