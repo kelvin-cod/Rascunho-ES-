@@ -404,11 +404,19 @@
         tbl_quartil += ('<tr>')
         tbl_quartil += ('<td>' + 'Q' + '</td>')
         //enche a tabela
-        for (let i = 25; i <= 100; i += 25) {
-            Q = somatoriaFi * i / 100;
-            tbl_quartil += ('<td>' + Q + '</td>')
+        let quartil = 25 // variavel para quartil
+        do {
+            Q = somatoriaFi * quartil / 100;
+            console.log(Q) // calculo porcentagem
+            for (let j = 0; j < vetor.length; ++j) {
 
-        }
+                if (Q < vetor[j].somaVariavel) { //pesquisa o objeto e acha o lugar
+                    tbl_quartil += ('<td>' + '(' + Q + ')' + j + "ºPosição" + '</td>');
+                    quartil += 25
+                }
+            }
+            // incremento no quartil
+        } while (quartil != 100)
         tbl_quartil += ('</tr>')
         tbl_quartil += ('</table>')
         document.getElementById("outquartil").innerHTML = tbl_quartil; //atribui no div
