@@ -203,12 +203,16 @@
             frequenciaPor: '',
             fac: '',
             facPorcentagem: '',
-            somaVariavel: ''
+            somaVariavel: '',
+            posiçao: ''
         }
+        let posi = 1
         // atribui o objeto para as copias
         for (let i = 0; i < vetorLimpo.length; ++i) {
             vetor[i] = Object.assign({}, obj);
             vetor[i].variavelPesquisada = vetorLimpo[i]
+            vetor[i].posiçao = posi
+            posi++
         }
         // { a: 1 }
         vetor.push(obj)
@@ -405,18 +409,24 @@
         tbl_quartil += ('<td>' + 'Q' + '</td>')
         //enche a tabela
         let quartil = 25 // variavel para quartil
-        do {
-            Q = somatoriaFi * quartil / 100;
-            console.log(Q) // calculo porcentagem
-            for (let j = 0; j < vetor.length; ++j) {
 
-                if (Q < vetor[j].somaVariavel) { //pesquisa o objeto e acha o lugar
-                    tbl_quartil += ('<td>' + '(' + Q + ')' + j + "ºPosição" + '</td>');
+        while (quartil <= 100) {
+
+            // calculo porcentagem
+            for (let j = 0; j < vetor.length - 1; ++j) {
+                Q = (somatoriaFi * quartil) / 100;
+                console.log(Q)
+                if (Q <= vetor[j].somaVariavel) { //pesquisa o objeto e acha o lugar
+                    tbl_quartil += ('<td>' + '(' + Q + ')' + vetor[j].posiçao + "ºPosição" + '</td>');
                     quartil += 25
+
                 }
+
             }
+
             // incremento no quartil
-        } while (quartil != 100)
+        }
+
         tbl_quartil += ('</tr>')
         tbl_quartil += ('</table>')
         document.getElementById("outquartil").innerHTML = tbl_quartil; //atribui no div
