@@ -2,8 +2,11 @@
 
 <head>
     <style>
-        #combos {
-            font-weight: bold
+        #combos,
+        .combo,
+        input {
+            font-weight: bold;
+            text-align: left
         }
     </style>
 </head>
@@ -11,23 +14,79 @@
 <body>
     <div id="combos">
         <h3>Selecione as Medidas: </h3>
-        <label for="">Quartil:</label>
+        <label for="">Quartil(Q):</label>
         <select id="C_quartil" class="combo">
-            <option value=""></option>
-            <option value=""></option>
-            <option value=""></option>
-            <option value=""></option>
+            <option value="Q1">Quartil 1</option>
+            <option value="Q2">Quartil 2</option>
+            <option value="Q3">Quartil 3</option>
+            <option value="Q4">Quartil 4</option>
         </select>
-        <br>
-        <label for="">Quintil:</label>
-        <br>
-        <label for="">Decil:</label>
-        <br>
-        <label>Percentil:</label>
+        <br><br>
+        <label for="">Quintil(K):</label>
+        <select class="combo" id="C_quintil">
+            <option value="K1">Quintil 1</option>
+            <option value="K2">Quintil 2</option>
+            <option value="K3">Quintil 3</option>
+            <option value="K4">Quintil 4</option>
+            <option value="K5">Quintil 5</option>
+        </select>
+        <br><br>
+        <label for="">Decil(D):</label>
+        <select class="combo" id="C_decil">
+            <option value="D1">Decil 1</option>
+            <option value="D2">Decil 2</option>
+            <option value="D3">Decil 3</option>
+            <option value="D4">Decil 4</option>
+            <option value="D5">Decil 5</option>
+            <option value="D6">Decil 6</option>
+            <option value="D7">Decil 7</option>
+            <option value="D8">Decil 8</option>
+            <option value="D9">Decil 9</option>
+            <option value="D10">Decil 10</option>
+        </select>
+        <br><br>
+        <label>Percentil(P):</label>
         <input id="input_p" size=3>
     </div>
 </body>
 <script>
+    let resposta
+
+    function separatrizes(parametro) {
+        //  while (decil <= 100) { // calculo porcentagem 
+        for (let j = 0; j < vetor.length - 1; ++j) {
+            Q = (somatoriaFi * parametro) / 100;
+            if (Q <= vetor[j].somaVariavel) { //pesquisa o objeto e acha o lugar 
+                resposta = ('<td>' + '(' + Q + ')' +
+                    vetor[j].posiçao + "ºPosição" + '</td>');
+            }
+        }
+    }
+    // }
+
+
+    function casos() {
+        let opçoes = document.getElementById("C_quartil").value
+        switch (opçoes) {
+            case "Q1":
+                separatrizes(25)
+                document.getElementById("resultado").innerHTML = resposta
+                break;
+            case "Q2":
+                separatrizes(50)
+                document.getElementById("resultado").innerHTML = resposta
+                break;
+            case "Q3":
+                separatrizes(75)
+                document.getElementById("resultado").innerHTML = resposta.innerHTML
+                break;
+            case "Q4":
+                separatrizes(100)
+                document.getElementById("resultado").innerHTML = resposta
+                break;
+            default:
+        }
+    }
 </script>
 
 </html>
