@@ -423,40 +423,68 @@
     //-------------------------------------------
     let resposta
 
-    function separatrizes(parametro, vet) {
+    function separatrizes(parametro, vet, medida) {
         // calculo porcentagem
         for (let j = 0; j < vet.length - 1; ++j) {
             Q = (somatoriaFi * parametro) / 100;
             if (Q <= vet[j].somaVariavel) { //pesquisa o objeto e acha o lugar
-                return resposta = ('<h3>' + '(' + Q + ')' +
+                return resposta = ('<h3>' + medida + '(' + Q + ')' +
                     vet[j].posiçao + "ºPosição" + '</h3>');
             }
+            resposta = ''
         }
     }
+    let Quartil = 'Quartil'
 
     function casosQuartil(vetor) {
         let opçoes = document.getElementById("C_quartil").value
         switch (opçoes) {
             case "Q1":
-                separatrizes(25, vetor)
-                resposta += "Quartil"
+                separatrizes(25, vetor, Quartil)
                 document.getElementById("resultado").innerHTML = resposta
                 break;
             case "Q2":
-                separatrizes(50, vetor)
+                separatrizes(50, vetor, Quartil)
                 document.getElementById("resultado").innerHTML = resposta
                 break;
             case "Q3":
-                separatrizes(75, vetor)
+                separatrizes(75, vetor, Quartil)
                 document.getElementById("resultado").innerHTML = resposta
                 break;
             case "Q4":
-                separatrizes(100, vetor)
+                separatrizes(100, vetor, Quartil)
                 document.getElementById("resultado").innerHTML = resposta
                 break;
             default:
         }
+    }
+    let Quintil = "Quintil"
 
+    function casosQuintil(vetor) {
+        let opçoes = document.getElementById("C_quintil").value
+        switch (opçoes) {
+            case "k1":
+                separatrizes(20, vetor, Quintil)
+                document.getElementById("resultado").innerHTML = resposta
+                break;
+            case "K2":
+                separatrizes(40, vetor, Quintil)
+                document.getElementById("resultado").innerHTML = resposta
+                break;
+            case "K3":
+                separatrizes(60, vetor, Quintil)
+                document.getElementById("resultado").innerHTML = resposta
+                break;
+            case "K4":
+                separatrizes(80, vetor, Quintil)
+                document.getElementById("resultado").innerHTML = resposta
+                break;
+            case "K5":
+                separatrizes(100, vetor, Quintil)
+                document.getElementById("resultado").innerHTML = resposta
+                break;
+            default:
+        }
     }
 
     //---------------------------------------------------------------------
@@ -483,7 +511,7 @@
     <div id="combos" width="50%">
         <h2>Selecione as Medidas: </h2>
         <label for="">Quartil(Q):</label>
-        <select id="C_quartil" class="combo" onchange="casosQuartil(vetor)">
+        <select id="C_quartil" class="combo" onchange="casosQuartil()">
             <option value="Q1">Quartil 1</option>
             <option value="Q2">Quartil 2</option>
             <option value="Q3">Quartil 3</option>
@@ -518,10 +546,12 @@
         <br>
         <br>
         <br>
-        <button onclick=" casosQuartil(vetor)">Enviar</button>
+        <button onclick="casosQuartil(vetor),casosQuintil(vetor)">Enviar</button>
 
     </div>
-    <div id="resultado"></div>
+    <div id="resultado">
+        <textarea type="text" name="in" id="teste"></textarea>
+    </div>
     <div id="outresultado" class='tabela1'></div>
     <br>
     <div id="outputDiv"></div>
