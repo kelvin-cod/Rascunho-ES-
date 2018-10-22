@@ -1,12 +1,3 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-    <!-- ajuda a acentuação -->
-    <meta charset="utf8">
-
-</head>
-<script type="text/javascript">
     let vetor = []
     let objColuna = {
         Linha: '',
@@ -77,7 +68,7 @@
         0.4964, 0.4974, 0.4981, 0.4986, 0.4990, 0.4993, 0.4995, 0.4997, 0.4998,
         0.4998, 0.4999, 0.4999, 0.4999, 0.5000
     ]
-    let id = [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0,
+    let id = [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0,
         1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2.0, 2.1,
         2.2, 2.3, 2.4, 2.5, 2.6, 2.7, 2.8, 2.9, 3.0, 3.1, 3.2,
         3.3, 3.4, 3.5, 3.6, 3.7, 3.8, 3.9
@@ -90,33 +81,25 @@
             vetor[i].Linha = id[i] // acrescenta a busca
             vetor[i].Numero = col[i] //acrecenta a coluna
         }
-        console.log(vetor)
     }
-    //     buscar(c4)
     let numero2
     let numero3
-    let array
-    let Zero
+    let array = []
 
-    function botao(form) {
-        //   let num = document.getElementById("formu")
-        form = document.getElementById('input').value
-        //  let texto = num.toString()
-        let vet = (form.split('').map(Number)) // divide o numero em um vetor
-        //--------------------------------------------------------------
+    function ajuste(nr, casas) {
+        const og = Math.pow(10, casas)
+        return Math.floor(nr * og) / og;
+    }
 
-        numero2 = parseFloat(vet[0] + '.' + vet[2]) //concatena o numero em 2 casas
-        if ((numero2 > 3.9) || (numero2 < 0)) {
-            alert("Numero Invalido")
+    function procurar(x) {
+        console.log('x: ' + x)
+        numero2 = ajuste(x, 1)
+        if (numero2 === 0) {
+            numero3 = x * 100
+        } else {
+            numero3 = parseInt(((x % numero2) * 100).toFixed(1));
         }
         //---------------------------------------------------
-        if (vet.length == 3) {
-            numero3 = 0
-        } else if (vet.length == 4) {
-            numero3 = vet[3] // pega a 3 casa do numero
-        }
-        array = [] // vetor mestre
-        // cria o vetor mestre
         array.push(c0)
         array.push(c1)
         array.push(c2)
@@ -127,10 +110,13 @@
         array.push(c7)
         array.push(c8)
         array.push(c9)
-
+        console.log('numero2:' + numero2)
+        console.log('numero3:' + numero3)
         return numero2, numero3, array
     }
+    let resul
 
+    //-------------------------------------------------------------------------------
     function achar(casa3, casa2) {
         for (let i = 0; i <= array.length; i++) {
             if (i === casa3) {
@@ -138,25 +124,9 @@
             }
         }
         for (let i = 0; i < id.length; i++) {
-
             if (casa2 == vetor[i].Linha) {
-                let resul = (vetor[i].Numero)
-                form.resultado.value = resul;
+                resul = (vetor[i].Numero)
             }
         }
-
+        return resul;
     }
-    // achar(numero3, numero2)
-</script>
-
-<body>
-    <h3>Digite o numero entre (0 : 3.9)</h3>
-    <form class="formulario-validacao" id="form"">
-            <input type=" text" id="input" name="campo" />
-    <input type="button" NAME="submit" value="Enviar" onclick="botao(this.form),achar(numero3, numero2)">
-
-    <h3>Resultado</h3>
-    <input type="text" name="resultado" />
-</body>
-
-</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!--Ajusta a acentuação -->
+  <meta charset="utf8" />
+  <title>Página-modelo HTML</title>
+  <h1>Distribuição Normal</h1>
+  <style>
+
+    label{
+      font-weight: bold;
+    }
+      #form1{
+      width: 49%;/* largura*/
+      height: 350px;/*altura*/
+      background: rgb(93, 170, 241);
+      color: rgb(5, 5, 5);
+      text-align:center;
+      position: relative;
+      border:1px solid black;
+      float: left;
+}
+#resultado{
+position: relative;
+float: left;
+border-width:2px;
+border:1px solid black;
+width:49.5%;
+height: 350px;
+background-color:rgb(247, 189, 83);
+-webkit-text-size-adjust:auto
+}
+</style>
+
+</head>
+<script type="text/javascript">
+  let z;
+  let media = 0;
+  let dp = 0;
+  const infinito = 0.5;
+  let variavel
+
+  //-----------------------------------------------------------
+  //função para caixa entre
+  function optionCheck() {
+    var option = document.getElementById("cbopçoes").value;
+    if (option == "Entre") {
+      document.getElementById("mostrar").style.visibility = "visible";
+    } else {
+      document.getElementById("mostrar").style.visibility = "hidden";
+    }
+
+  };
+  //---------------------------------------------------------------------
+  function botao(form) {
+    media = document.getElementById('Media').value
+    dp = document.getElementById('desvioPadrao').value
+    variavel = document.getElementById('Variavel').value
+    console.log('media: ' + media)
+    console.log('dp: ' + dp)
+  }
+
+  function distribuicaoNormal(x, media, dp) {
+    z = (x - media) / dp;
+    z = parseFloat(z.toFixed(2));
+    return z
+  }
+  let resposta
+
+  function casos() {
+    let opçoes = document.getElementById("cbopçoes").value
+    switch (opçoes) {
+
+      case "Ex_igual":
+        document.getElementById("resultado").innerHTML = resposta
+        break;
+        //------------------------------------------------------------
+      case "Maior_que": //caso maior que
+        distribuicaoNormal(variavel, media, dp)
+        resposta = ('<h2>' + 'Resultado:' + '<br>' +
+          z + '%' + '</h2>')
+        console.log(z)
+
+        document.getElementById("resultado").innerHTML = resposta
+        break;
+      case "Menor_que": //caso maior que
+
+        break;
+      default:
+    }
+  }
+</script>
+<script src="/tabelanormal.js"></script>
+
+<body>
+  <div>
+    <form id="form1">
+      <br>
+      <label>Digite a média:</label>
+      <input type="text" class='media' id='Media'>
+      <br>
+      <br>
+      <label>Digite o desvio padrão:</label>
+      <input type="text" class="dPadrao" id='desvioPadrao'>
+      <br>
+      <p>
+        <label for="text">Probabilidade:</label>
+        <select id="cbopçoes" onchange="optionCheck()">
+          <option value="Ex_igual">EXATAMENTE</option>
+          <option value="Maior_que">MAIOR Que</option>
+          <option value="Menor_que">MENOR Que</option>
+          <option value="Entre">ENTRE</option>
+        </select>
+
+        <input type="text" name="campo" id="Variavel" />
+        <label for="nome"></label>
+
+        <div id="mostrar" style="border:1px;visibility:hidden;">
+          <input type="text" id="maior" />
+          <label for="nome">Até(Max)</label>
+        </div>
+      </p>
+      <input type="button" value="Enviar" onclick="botao(this.form),casos()">
+    </form>
+  </div>
+  <div id="resultado">
+
+  </div>
+</body>
+
+</html>
