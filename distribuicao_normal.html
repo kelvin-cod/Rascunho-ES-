@@ -5,8 +5,20 @@
   <!--Ajusta a acentuação -->
   <meta charset="utf8" />
   <title>Página-modelo HTML</title>
-  <h1>Distribuição Normal</h1>
+  <div class="page-header">
+    <h1>Easy Statics: Distribuição Normal</h1>
+  </div>
+
+  <div class="voltar">
+    <button class="css3button" onclick="voltar()">Voltar</button>
+  </div>
   <style>
+    .voltar{
+        background-color:rgb(91, 94, 245);
+        margin-top: 0;
+        padding: 10px 20px 20px 30px;
+        border:1px solid black;
+      }
 
     label{
       font-weight: bold;
@@ -31,15 +43,52 @@ height: 350px;
 background-color:rgb(247, 189, 83);
 -webkit-text-size-adjust:auto
 }
+button.css3button {
+position: relative;
+font-family: Arial, Helvetica, sans-serif;
+font-size: 14px;
+color: black;
+padding: 10px 20px;
+background: -moz-linear-gradient(
+top,
+#f3f5f3,
+#19e75e);
+background: -webkit-gradient(
+linear, left top, left bottom,
+from(#00E676),
+to(#00E676));
+-moz-border-radius: 6px;
+-webkit-border-radius: 6px;
+border-radius: 6px;
+border: 1px solid #000000;
+-moz-box-shadow:
+0px 1px 3px rgba(000,000,000,0.5),
+inset 0px 0px 1px rgba(255,255,255,1);
+-webkit-box-shadow:
+0px 1px 3px rgba(000,000,000,0.5),
+inset 0px 0px 1px rgba(255,255,255,1);
+box-shadow:
+0px 1px 3px rgba(000,000,000,0.5),
+inset 0px 0px 1px rgba(255,255,255,1);
+text-shadow:
+0px -1px 0px rgba(000,000,000,0.7),
+0px 1px 0px rgba(255,255,255,0.3);
+}
 </style>
 
 </head>
+<script type="text/javascript" src="C:\Users\casa\Documents\GitHub\Easy-Statics\tabelanormal.js"></script>
 <script type="text/javascript">
+  function voltar() {
+    location.href = "https://quebramedos.github.io/Easy-Statics/"
+  }
+
   let z;
   let media = 0;
   let dp = 0;
   const infinito = 0.5;
   let variavel
+  let ate
 
   //-----------------------------------------------------------
   //função para caixa entre
@@ -54,44 +103,113 @@ background-color:rgb(247, 189, 83);
   };
   //---------------------------------------------------------------------
   function botao(form) {
-    media = document.getElementById('Media').value
-    dp = document.getElementById('desvioPadrao').value
-    variavel = document.getElementById('Variavel').value
-    console.log('media: ' + media)
-    console.log('dp: ' + dp)
+    media = parseFloat(document.getElementById('Media').value);
+    dp = parseFloat(document.getElementById('desvioPadrao').value)
+    variavel = parseFloat(document.getElementById('Variavel').value)
+    ate = parseFloat(document.getElementById('maior').value)
+    console.log(media)
+    return media, dp, variavel, ate
+
   }
 
   function distribuicaoNormal(x, media, dp) {
     z = (x - media) / dp;
     z = parseFloat(z.toFixed(2));
+    if (z < 0) {
+      z = z * (-1)
+    }
     return z
   }
   let resposta
+  let soma
+  let menos = 'menos'
+  let mais = 'mais'
+  let rr
+
+  function somar(constante, valor, operaçao) {
+
+    if (operaçao == 'menos') {
+      soma = (constante - valor) * 100
+    } else if (operaçao == 'mais') {
+      soma = (constante + valor) * 100
+    }
+    if (soma < 0) {
+      soma = soma * (-1)
+    }
+    soma = soma.toFixed(2)
+    return soma
+  }
 
   function casos() {
     let opçoes = document.getElementById("cbopçoes").value
     switch (opçoes) {
+      //------------------------------------------------------------
+      case "Maior_que": //caso maior que
+        distribuicaoNormal(variavel, media, dp) //calcula o o valor de z
+        procurar(z) //procura o valor de z na tabela
+        achar(numero3, numero2, array) // retorna o valor da tabela variavel resul
 
+        if (variavel > media) {
+          somar(infinito, resul, menos) //chama funçao para subtrair os valores
+        } else if (variavel < media) {
+          somar(infinito, resul, mais) //chama funçao para somar os valores
+        }
+
+        resposta = ('<h2>' + 'Resultado:' + soma + '%' + '</h2>') //da o resultado
+        console.log(resul)
+        document.getElementById("resultado").innerHTML = resposta
+        break;
+        //-----------------------------------------------------------------------------
+      case "Menor_que": //caso maior que
+        distribuicaoNormal(variavel, media, dp) //calcula o o valor de z
+        console.log('z' + z)
+        procurar(z) //procura o valor de z na tabela
+        achar(numero3, numero2, array) // retorna o valor da tabela variavel resul
+
+        if (variavel > media) {
+          somar(infinito, resul, mais) //chama funçao para subtrair os valores
+        } else if (variavel < media) {
+          somar(infinito, resul, menos) //chama funçao para somar os valores
+        }
+
+        resposta = ('<h2>' + 'Resultado:' + soma + '%' + '</h2>') //da o resultado
+        console.log(resul)
+        document.getElementById("resultado").innerHTML = resposta
+        break;
       case "Ex_igual":
         document.getElementById("resultado").innerHTML = resposta
         break;
-        //------------------------------------------------------------
-      case "Maior_que": //caso maior que
-        distribuicaoNormal(variavel, media, dp)
-        resposta = ('<h2>' + 'Resultado:' + '<br>' +
-          z + '%' + '</h2>')
-        console.log(z)
+      case "Entre":
+        //calcula o o valor de z
+        //procura o valor de z na tabela
+        // retorna o valor da tabela variavel resul
+        let z1 = distribuicaoNormal(variavel, media, dp)
+        let z2 = distribuicaoNormal(ate, media, dp)
+
+        procurar(z1)
+        z1 = achar(numero3, numero2, array);
+        console.log('z1:' + z1)
+
+        procurar(z2)
+        z2 = achar(numero3, numero2, array);
+        console.log('z2:' + z2)
+        if ((variavel < media) && (ate > media)) {
+          somar(z1, z2, mais)
+        } else if ((variavel > media) && (ate > media)) {
+          somar(z2, z1, menos)
+        } else if ((variavel == media) && (ate > media)) {
+          somar(z2, z1, menos)
+        } else {
+          somar(z2, z1, menos)
+        }
+        resposta = ('<h2>' + 'Resultado:' + soma + '%' + '</h2>') //da o resultado
 
         document.getElementById("resultado").innerHTML = resposta
-        break;
-      case "Menor_que": //caso maior que
-
-        break;
       default:
     }
   }
 </script>
-<script src="/tabelanormal.js"></script>
+
 
 <body>
   <div>
@@ -107,9 +225,9 @@ background-color:rgb(247, 189, 83);
       <p>
         <label for="text">Probabilidade:</label>
         <select id="cbopçoes" onchange="optionCheck()">
-          <option value="Ex_igual">EXATAMENTE</option>
           <option value="Maior_que">MAIOR Que</option>
           <option value="Menor_que">MENOR Que</option>
+          <option value="Ex_igual">EXATAMENTE</option>
           <option value="Entre">ENTRE</option>
         </select>
 
@@ -117,8 +235,9 @@ background-color:rgb(247, 189, 83);
         <label for="nome"></label>
 
         <div id="mostrar" style="border:1px;visibility:hidden;">
-          <input type="text" id="maior" />
           <label for="nome">Até(Max)</label>
+          <input type="text" id="maior" />
+
         </div>
       </p>
       <input type="button" value="Enviar" onclick="botao(this.form),casos()">
