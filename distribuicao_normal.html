@@ -22,7 +22,7 @@
       .page-header {
       background-color:#00E676;
       margin-top: 0;
-      padding: 10px 20px 20px 30px;
+      padding: 10px 20px 5px 30px;
       border:1px solid black;
       text-align: center;
       -webkit-text-stroke-width: 1px;
@@ -31,17 +31,22 @@
       position: relative;
       }
     label,p{
-      font-weight: bold;
+    font-weight: bold;
+    position: relative;
+
+    }
+    label,.mostrar{
+      padding: 0px 0px 20px 100px
     }
       #form1{
-      width: 49%;/* largura*/
+      width: 50%;/* largura*/
       height: 350px;/*altura*/
       background: rgb(93, 170, 241);
       color: rgb(5, 5, 5);
-      text-align:center;
       position: relative;
       border:1px solid black;
       float: left;
+    
 }
 #resultado{
 position: relative;
@@ -54,6 +59,7 @@ background-color:rgb(247, 189, 83);
 -webkit-text-size-adjust:auto
 }
 button.css3button {
+align-items: center;
 position: relative;
 font-family: Arial, Helvetica, sans-serif;
 font-size: 14px;
@@ -83,6 +89,21 @@ inset 0px 0px 1px rgba(255,255,255,1);
 text-shadow:
 0px -1px 0px rgba(000,000,000,0.7),
 0px 1px 0px rgba(255,255,255,0.3);
+}
+input,select{
+width: 15%;
+border:1px solid black;
+font-weight: bold;
+}
+select{
+  width: 20%
+}
+h1 {
+color:white;
+font-size: 50px;
+}
+#bot{
+  padding: 0px 20px 20px 200px;
 }
 </style>
 
@@ -224,7 +245,7 @@ text-shadow:
 <body>
   <div>
     <form id="form1">
-      <br>
+      <h2 align="center">Digite os dados:</h2>
       <label>Digite a média:</label>
       <input type="text" class='media' id='Media'>
       <br>
@@ -233,6 +254,7 @@ text-shadow:
       <input type="text" class="dPadrao" id='desvioPadrao'>
       <br>
       <p>
+
         <label for="text">Probabilidade:</label>
         <select id="cbopçoes" onchange="optionCheck()">
           <option value="Maior_que">MAIOR Que</option>
@@ -250,11 +272,14 @@ text-shadow:
 
         </div>
       </p>
-      <input type="button" value="Enviar" onclick="botao(this.form),casos()">
+      <div id="bot">
+        <button class="css3button" type="button" value="Enviar" onclick="botao(this.form),casos()">
+          Enviar</button>
+      </div>
     </form>
   </div>
   <div id="resultado">
-
+    <h2 align="center">Resultado:</h2>
   </div>
 </body>
 
