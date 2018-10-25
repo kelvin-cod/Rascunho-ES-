@@ -36,12 +36,12 @@
     function uniforme() {
         min = parseFloat(document.getElementById("minimo").value)
         max = parseFloat(document.getElementById("maximo").value)
-        parametro = parseFloat(document.getElementById('valor').value)
+        parametro = parseFloat(document.getElementById("valor").value)
         console.log(min)
         console.log(max)
         media = (min + max) / 2
         padrao(min, max)
-        probabilidade(min, max)
+
         return min, max
     }
 
@@ -50,11 +50,24 @@
         return diff
     }
 
-    function probabilidade(x, y) {
-        resul = (1 / (y - x)) * diff // formula probabilidade
+    function probabilidade(x, y, dif) {
+        resul = (1 / (y - x)) * dif // formula probabilidade
         resul = resul * 100
         console.log(resul)
         return resul
+    }
+    let resposta
+
+    function casos() {
+        let opçoes = document.getElementById("cbopçoes").value
+        switch (opçoes) {
+            case "maior_Q":
+
+            case "menor_Q":
+                diferença(parametro, min)
+                probabilidade(min, max, diff)
+            default:
+        }
     }
 </script>
 
@@ -72,22 +85,22 @@
         <input type="text" id="maximo">
         <br>
         <br>
-        <button id="botao" onclick="uniforme()">Enviar</button>
+
     </p>
     <br>
 
     <h2>Probabilidade</h2>
     <select name="combo" id="cbopçoes" onchange="optionCheck()">
         <option value="maior_Q">Maior que</option>
-        <option value="menor_Q">Menor que</option>
+        <option value="menor_Q" onchange="casos()">Menor que</option>
         <option value="Entre">Entre</option>
     </select>
-    <input type="text" id='valor'>
+    <input type="text" id="valor">
     <div id="mostrar" style="visibility:hidden;">
         <input type="text" id="maior" />
         <label for="nome">Até(Max)</label>
     </div>
-
+    <button id="botao" onclick="uniforme(), casos()">Enviar</button>
     <input type="range" min='100' max='2000'>
 </body>
 
