@@ -1,34 +1,95 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Document</title>
 </head>
+<script type="text/javascript">
+    let min
+    let max
+    let media
+    let desvio
+    let resul
+    let parametro
+    let diff
+    //-----------------------------------------------------------
+    //função para caixa entre
+    function optionCheck() {
+        var option = document.getElementById("cbopçoes").value;
+        if (option == "Entre") {
+            document.getElementById("mostrar").style.visibility = "visible";
+        } else {
+            document.getElementById("mostrar").style.visibility = "hidden";
+        }
+
+    }
+
+    function padrao(a, b) {
+        desvio = Math.pow(b - a, 2)
+        desvio = desvio / 12
+        desvio = Math.sqrt(desvio)
+        console.log(desvio)
+    }
+
+    function uniforme() {
+        min = parseFloat(document.getElementById("minimo").value)
+        max = parseFloat(document.getElementById("maximo").value)
+        parametro = parseFloat(document.getElementById('valor').value)
+        console.log(min)
+        console.log(max)
+        media = (min + max) / 2
+        padrao(min, max)
+        probabilidade(min, max)
+        return min, max
+    }
+
+    function diferença(maxi, mini) {
+        diff = maxi - mini
+        return diff
+    }
+
+    function probabilidade(x, y) {
+        resul = (1 / (y - x)) * diff // formula probabilidade
+        resul = resul * 100
+        console.log(resul)
+        return resul
+    }
+</script>
 
 <body>
-    <div>
-        <form>
-            <label for="">Digite os dados:</label>
-            <br>
-            <p>
-                <label>
-                    Minimo:
-                </label>
-                <input type="text" id='minimo'>
-                <br>
-                <br>
-                <label>Máximo:</label>
-                <input type="text" id='maximo'>
-                <input type="range" name="" id="">
 
-            </p>
-        </form>
+
+    <label for="form">Digite os dados:</label>
+    <br>
+    <p>
+        <label>Minimo:</label>
+        <input type="text" id="minimo">
+        <br>
+        <br>
+        <label>Máximo:</label>
+        <input type="text" id="maximo">
+        <br>
+        <br>
+        <button id="botao" onclick="uniforme()">Enviar</button>
+    </p>
+    <br>
+
+    <h2>Probabilidade</h2>
+    <select name="combo" id="cbopçoes" onchange="optionCheck()">
+        <option value="maior_Q">Maior que</option>
+        <option value="menor_Q">Menor que</option>
+        <option value="Entre">Entre</option>
+    </select>
+    <input type="text" id='valor'>
+    <div id="mostrar" style="visibility:hidden;">
+        <input type="text" id="maior" />
+        <label for="nome">Até(Max)</label>
     </div>
 
+    <input type="range" min='100' max='2000'>
 </body>
-<script type="text/javascript">
-</script>
+
 
 </html>
