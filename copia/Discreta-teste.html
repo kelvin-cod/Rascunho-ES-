@@ -5,6 +5,8 @@
     <!-- ajuda a acentuação -->
     <meta charset="utf8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
     <title>ES-Discreta</title>
     <div class="page-header">
         <h1>Easy Statics: Discreta</h1>
@@ -32,6 +34,7 @@
             height: 120px;
         }
 
+        /*
         #resultado,
         #combos {
             width: 34%;
@@ -91,9 +94,12 @@
         }
     </style>
 </head>
-<link rel="stylesheet" type="text/css" media="screen" href="C:\Users\casa\Documents\GitHub\Easy-Statics\css\css\bootstrap.css">
-<link rel="stylesheet" type="text/css" media="screen" href="C:\Users\casa\Documents\GitHub\Easy-Statics\css\estilos.css">
-<link rel="stylesheet" type="text/javascript" media="screen" href="C:\Users\casa\Documents\GitHub\Easy-Statics\script\js\bootstrap.js">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<link rel="stylesheet" type="text/javascript" media="screen" href="C:\Users\casa\Documents\GitHub\Easy-Statics\script\js\bootstrap.min.js">
+<link rel="stylesheet" media="screen" href="C:\Users\casa\Documents\GitHub\Easy-Statics\css\css\bootstrap.css">
+<link rel="stylesheet" media="screen" href="C:\Users\casa\Documents\GitHub\Easy-Statics\css\estilos.css">
+
+
 <script type="text/javascript">
     function voltar() {
         location.href = "https://quebramedos.github.io/Easy-Statics/"
@@ -314,7 +320,7 @@
         let param;
         //-------------------------------------------------------------------
         //cria 1 tabela
-        var HTML = "<table align=center class='table table-striped table-dark'>< tr> ";
+        var HTML = "<table align=center class='table table-striped table-dark'><tr> ";
         HTML += ('<h3 align = center>TABELA</h3>')
         HTML += '<th>Variavel Pesquisada(xi)</th><th>Frequencia(fi)</th>'
         HTML += '<th>Frequencia%(fi%)</th><th>Frequencia Acumulada</th><th>Fac %</th></tr>'
@@ -343,7 +349,7 @@
         totalfac = 0
         //-------------------------------------------------------------------------
         //resultados------------------------------------------------------------------
-        var tbl_resul = "<table align=center class='table table-striped table-dark'>><tr>";
+        var tbl_resul = "<table align=center class='table table-striped table-dark'><tr>";
         tbl_resul += ('<h3 align = center>RESULTADOS</h3>')
 
         tbl_resul += ('<tr>')
@@ -430,102 +436,120 @@
                 break;
             default:
         }
-    }
+        $("#myTab li").on("click", function () {
+            $(".nav a").removeClass("active");
+            $(this).addClass("active");
 
+        })
+    }
     //---------------------------------------------------------------------
 </script>
 
 <body>
-    <div>
-        <ul class="nav nav-tabs">
-            <nav>
-                <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab"
-                        aria-controls="nav-home" aria-selected="true">Dados</a>
-                    <a class="nav-item nav-link" id="nav-separatrizes-tab" data-toggle="tab" href="#nav-separatrizes"
-                        role="tab" aria-controls="nav-separatrizes" aria-selected="false">Separatrizes</a>
-                    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab"
-                        aria-controls="nav-contact" aria-selected="false">Probabilidade</a>
-                </div>
-            </nav>
 
-            <div class="tab-content" id="nav-tabContent">
-
-                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                    <div id="formu">
-                        <h2>Selecione a Estimação:</h2>
-                        <form name="estimacao" onchange="estima()">
-                            <input type="radio" name="quan" value=0 class="bolinha" />População<br />
-                            <input type="radio" name="quan" value=1 class="bolinha" />Amostra <br />
-                        </form>
-                        <h2>Digite os Dados:</h2>
-                        <form class="formulario-validacao" id="form">
-                            <textarea type="text" id='input' name="campo" autocomplete="off" placeholder="DIGITE OS NUMEROS COM ESPAÇOS EX: 10 20 30 40           
+    <div class="container border border-dark">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs nav-justify" id="myTab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
+                    aria-selected="true">Dados</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
+                    aria-selected="false">Separatrizes</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="messages-tab" data-toggle="tab" href="#messages" role="tab" aria-controls="messages"
+                    aria-selected="false">Messages</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="settings-tab" data-toggle="tab" href="#settings" role="tab" aria-controls="settings"
+                    aria-selected="false">Settings</a>
+            </li>
+        </ul>
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div class="tab-pane active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                <h2>Selecione a Estimação:</h2>
+                <form name="estimacao" onchange="estima()">
+                    <input type="radio" name="quan" value=0 />População<br />
+                    <input type="radio" name="quan" value=1 />Amostra <br />
+                </form>
+                <h2>Digite os Dados:</h2>
+                <form class="formulario-validacao" id="form">
+                    <textarea type="text" id='input' name="campo" autocomplete="off" placeholder="DIGITE OS NUMEROS COM ESPAÇOS EX: 10 20 30 40           
             "></textarea>
-                            <br>
-                            <button class="btn btn-lg btn-primary" type="button" name="submit" value="Enviar" onclick="botao(this.form),total()">Enviar</button>
-                        </form>
-                    </div>
-                </div>
-                <!------------------------------------------------------------------------------- -->
-                <div class="tab-pane fade   " id="nav-separatrizes" role="tabpanel" aria-labelledby="separatrizes-tab">
-                    <div id="combos" width="50%">
-                        <h2>Selecione as Medidas: </h2>
-                        <label for="">Quartil(Q):</label>
-                        <select id="C_quartil" class="combo" onchange="casosQuartil()">
-                            <option value="zero"></option>
-                            <option value="Q1">Quartil 1</option>
-                            <option value="Q2">Quartil 2</option>
-                            <option value="Q3">Quartil 3</option>
-                            <option value="Q4">Quartil 4</option>
-                        </select>
-                        <br> <br>
-                        <label for="">Quintil(K):</label>
-                        <select class="combo" id="C_quintil">
-                            <option value="zero"></option>
-                            <option value="K1">Quintil 1</option>
-                            <option value="K2">Quintil 2</option>
-                            <option value="K3">Quintil 3</option>
-                            <option value="K4">Quintil 4</option>
-                            <option value="K5">Quintil 5</option>
-                        </select>
-                        <br><br>
-                        <label for="">Decil(D):</label>
-                        <select class="combo" id="C_decil">
-                            <option value="zero"></option>
-                            <option value="D1">Decil 1</option>
-                            <option value="D2">Decil 2</option>
-                            <option value="D3">Decil 3</option>
-                            <option value="D4">Decil 4</option>
-                            <option value="D5">Decil 5</option>
-                            <option value="D6">Decil 6</option>
-                            <option value="D7">Decil 7</option>
-                            <option value="D8">Decil 8</option>
-                            <option value="D9">Decil 9</option>
-                            <option value="D10">Decil 10</option>
-                        </select>
-                        <br><br>
-                        <label>Percentil(P):</label>
-                        <input id="input_p" size=3>
-                        <br>
-                        <br>
-                        <br>
-                        <button onclick="casosQuartil(vetor),casosQuintil(vetor)">Enviar</button>
+                    <br>
+                    <button class="btn btn-lg btn-primary" type="button" name="submit" value="Enviar" onclick="botao(this.form),total()">Enviar</button>
+                </form>
+            </div>
 
-                    </div>
-                </div>
+
+            <div class="tab-pane active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                <h2>Selecione as Medidas: </h2>
+                <label for="">Quartil(Q):</label>
+                <select id="C_quartil" class="custom-select">
+                    <option value="zero"></option>
+                    <option value="Q1">Quartil 1</option>
+                    <option value="Q2">Quartil 2</option>
+                    <option value="Q3">Quartil 3</option>
+                    <option value="Q4">Quartil 4</option>
+                </select>
+                <br> <br>
+                <label for="">Quintil(K):</label>
+                <select class="combo custom-select" id="C_quintil">
+                    <option value="zero"></option>
+                    <option value="K1">Quintil 1</option>
+                    <option value="K2">Quintil 2</option>
+                    <option value="K3">Quintil 3</option>
+                    <option value="K4">Quintil 4</option>
+                    <option value="K5">Quintil 5</option>
+                </select>
+                <br><br>
+                <label for="">Decil(D):</label>
+                <select class="combo custom-select" id="C_decil">
+                    <option value="zero"></option>
+                    <option value="D1">Decil 1</option>
+                    <option value="D2">Decil 2</option>
+                    <option value="D3">Decil 3</option>
+                    <option value="D4">Decil 4</option>
+                    <option value="D5">Decil 5</option>
+                    <option value="D6">Decil 6</option>
+                    <option value="D7">Decil 7</option>
+                    <option value="D8">Decil 8</option>
+                    <option value="D9">Decil 9</option>
+                    <option value="D10">Decil 10</option>
+                </select>
+                <br><br>
+                <label>Percentil(P):</label>
+                <input id="input_p" size=3>
+                <br>
+                <br>
+                <br>
+                <button onclick="casosQuartil(vetor),casosQuintil(vetor)">Enviar</button>
             </div>
-            <div class="tab-pane fade " id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
-                bla bla
+
+
+            <div class="tab-pane" id="messages" role="tabpanel" aria-labelledby="messages-tab">bla</div>
+            <div class="tab-pane" id="settings" role="tabpanel" aria-labelledby="settings-tab">
+                aodiapsdkaksi09diqeoi
             </div>
+        </div>
+
+
+
+
+
+
+
     </div>
-
+    <!------------------------------------------------------------------------------- -->
 
 
     <!--<div id="resultado">
         <textarea type="text" name="in" id="teste"></textarea>
 </div>>-->
-    <div id="outresultado" class='tabela1'></div>
+    <div id="outresultado"></div>
     <br>
     <div id="outputDiv"></div>
     <br>

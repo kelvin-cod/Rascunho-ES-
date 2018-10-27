@@ -1,7 +1,13 @@
 .table table-striped table-dark {
     align-items: center;
+    align-content: center;
+    text-align: center
 }
 
-#formu {
-    border: 2px;
+.custom-select {
+    width: 15%;
+}
+
+label, input {
+    font-weight: bold;
 }
