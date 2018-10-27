@@ -10,145 +10,90 @@
         <h1>Easy Statics: Discreta</h1>
     </div>
     <div class="voltar">
-        <button class="css3button" onclick="voltar()">Voltar</button>
+        <button class="btn btn-lg btn-primary" onclick="voltar()">Voltar</button>
     </div>
     <style>
-        .voltar{
-            background-color:rgb(91, 94, 245);
+        .voltar {
+            background-color: rgb(172, 172, 177);
             margin-top: 0;
             padding: 20px 20px 20px 30px;
-            border:1px solid black;
+            border: 1px solid black;
         }
+
         .page-header {
-        background-color:#00E676;
-        margin-top: 0;
-      
-        border:2px solid black;
-        text-align: center;
-        -webkit-text-stroke-width: 1px;
-        -webkit-text-stroke-color: #000000;
-        font-family: fantasy;
-        height: 120px;
+            background-color: #00E676;
+            margin-top: 0;
+
+            border: 2px solid black;
+            text-align: center;
+            -webkit-text-stroke-width: 1px;
+            -webkit-text-stroke-color: #000000;
+            font-family: fantasy;
+            height: 120px;
         }
-      /*  .tabela1{
-            width: 69%;
+
+        #resultado,
+        #combos {
+            width: 34%;
             float: left;
-            border:2px solid black;
+            border: 2px solid black;
             height: 350px;
-            background-color:#00E676
-        }*/
-        #resultado,#combos{
-        width: 34%;
-        float: left;
-        border:2px solid black;
-        height: 350px;
-        background-color:rgb(248, 225, 97);
+            background-color: rgb(248, 225, 97);
         }
-        #combos{
+
+        #combos {
             background-color: rgb(243, 102, 66);
             text-align: center;
             font-weight: bold
         }
-        select{
+
+        select {
             font-weight: bold;
-            border:2px solid black
+            border: 2px solid black
         }
-        h1 {
-            color:white;
-            font-size: 50px;
-        }
+
         body {
-               background-color:whitesmoke
+            background-color: whitesmoke
         }
-            #formu{
+
+        /*   #formu {
             position: relative;
             float: left;
-            border-width:2px;
-            border:2px solid black;
-            width:30%;
+            border-width: 2px;
+            border: 2px solid black;
+            width: 30%;
             height: 350px;
-            background-color:rgb(247, 189, 83);
+            background-color: rgb(247, 189, 83);
             text-align: center;
             font-weight: bold;
-            }
-        table {
-                border-collapse: collapse;
-                text-align: center;
-                position: relative;
-                font-weight: bold;
-                align-items: center;
-                width:70%;
-                    }
-        
-                    tr:nth-child(even) {
-                        background: #d4d4d4;       
-                    }
-        
-                    th,
-                    td {
-                        padding: 5px 8px;
-                        border: 1px solid black;
-                    }
-        
-                    th {
-                        border-bottom: 1px solid white;
-                    }
-            button {
-            position: relative;
-            font-family: Arial, Helvetica, sans-serif;
-            font-size: 14px;
-            color: black;
-            padding: 10px 20px;
-            background: -moz-linear-gradient(
-            top,
-            #f3f5f3,
-            #19e75e);
-            background: -webkit-gradient(
-            linear, left top, left bottom,
-            from(#00E676),
-            to(#00E676));
-            -moz-border-radius: 6px;
-            -webkit-border-radius: 6px;
-            border-radius: 6px;
+        }
+*/
+        textarea {
             border: 1px solid #000000;
-            -moz-box-shadow:
-            0px 1px 3px rgba(000,000,000,0.5),
-            inset 0px 0px 1px rgba(255,255,255,1);
-            -webkit-box-shadow:
-            0px 1px 3px rgba(000,000,000,0.5),
-            inset 0px 0px 1px rgba(255,255,255,1);
-            box-shadow:
-            0px 1px 3px rgba(000,000,000,0.5),
-            inset 0px 0px 1px rgba(255,255,255,1);
-            text-shadow:
-            0px -1px 0px rgba(000,000,000,0.7),
-            0px 1px 0px rgba(255,255,255,0.3);
-            }
-            input.radio{
-                background:#ffffff;
-                border-radius:8px;
-            }
-            textarea{
-            border: 1px solid #000000;
-            background:#ffffff;
-            width:80%;
-            height:110px;
-            border-radius:4px;
-            -moz-border-radius:4px;
-            -webkit-border-radius:4px;
+            background: #ffffff;
+            width: 80%;
+            height: 110px;
+            border-radius: 4px;
+            -moz-border-radius: 4px;
+            -webkit-border-radius: 4px;
             box-shadow: 1px 1px 2px #333333;
             -moz-box-shadow: 1px 1px 2px #333333;
             -webkit-box-shadow: 1px 1px 2px #333333;
             resize: none;
             font-weight: bold;
             font-size: 15px
-            }
-            
-            input[type=text]:hover, textarea:hover{
-            background: #ffffff; border:1px solid #990000;
-            }
-</style>
+        }
+
+        input[type=text]:hover,
+        textarea:hover {
+            background: #ffffff;
+            border: 1px solid #990000;
+        }
+    </style>
 </head>
+<link rel="stylesheet" type="text/css" media="screen" href="C:\Users\casa\Documents\GitHub\Easy-Statics\css\css\bootstrap.css">
+<link rel="stylesheet" type="text/css" media="screen" href="C:\Users\casa\Documents\GitHub\Easy-Statics\css\estilos.css">
+<link rel="stylesheet" type="text/javascript" media="screen" href="C:\Users\casa\Documents\GitHub\Easy-Statics\script\js\bootstrap.js">
 <script type="text/javascript">
     function voltar() {
         location.href = "https://quebramedos.github.io/Easy-Statics/"
@@ -296,7 +241,7 @@
             let divisor = 0;
             let dividendo = 0;
 
-            for (let i = 0; i < vetor.length - 1; i++) {
+            for (let i = 0; i < vetor.length; i++) {
                 dividendo += vetor[i].variavelPesquisada * vetor[i].frequencia;
                 divisor += vetor[i].frequencia;
             }
@@ -337,12 +282,12 @@
 
 
         function funDesvio() {
-            for (let i = 0; i < vetor.length - 1; ++i) {
+            for (let i = 0; i < vetor.length; ++i) {
                 aux2 = parseFloat(vetor[i].variavelPesquisada - media).toFixed(2)
                 // tira a media da variavel
                 //desvio padrao recebe frequencia - media elevado ao quadrado
-                desvioPadrao += parseFloat((Math.pow(aux2, 2) * vetor[i].frequencia).toFixed(2)) //+ desvioPadrao)
-
+                desvioPadrao += parseFloat((Math.pow(aux2, 2) * vetor[i].frequencia).toFixed(2))
+                //+ desvioPadrao)
             }
             aux3 = desvioPadrao / (aux - est) //auxiliar para receber o desvio
             desvioPadrao = parseFloat(Math.sqrt(aux3).toFixed(2))
@@ -369,10 +314,10 @@
         let param;
         //-------------------------------------------------------------------
         //cria 1 tabela
-        var HTML = "<table align=center><tr>";
+        var HTML = "<table align=center class='table table-striped table-dark'>< tr> ";
         HTML += ('<h3 align = center>TABELA</h3>')
-        HTML += '<td>Variavel Pesquisada(xi)</td><td>Frequencia(fi)</td>'
-        HTML += '<td>Frequencia%(fi%)</td><td>Frequencia Acumulada</td><td>Fac %</td></tr>'
+        HTML += '<th>Variavel Pesquisada(xi)</th><th>Frequencia(fi)</th>'
+        HTML += '<th>Frequencia%(fi%)</th><th>Frequencia Acumulada</th><th>Fac %</th></tr>'
         let totalfac = 0
         for (let linha = 0; linha < vetorLimpo.length; ++linha) {
             //calculos frequencia
@@ -398,12 +343,12 @@
         totalfac = 0
         //-------------------------------------------------------------------------
         //resultados------------------------------------------------------------------
-        var tbl_resul = "<table align=center > <tr>";
+        var tbl_resul = "<table align=center class='table table-striped table-dark'>><tr>";
         tbl_resul += ('<h3 align = center>RESULTADOS</h3>')
-        tbl_resul += ('<table align = center class="tabela">')
+
         tbl_resul += ('<tr>')
         tbl_resul += (
-            '<td>Media(x)</td><td>Moda(Mo)</td><td>Mediana(Md)</td><td>Desvio Padrao(dx)</td><td>Coificiente Padrão</td>'
+            '<th>Media(x)</th><th>Moda(Mo)</th><th>Mediana(Md)</th><th>Desvio Padrao(dx)</th><th>Coificiente Padrão</th>'
         )
         tbl_resul += ('</tr>') //primeira linha
         tbl_resul += ('<tr>')
@@ -491,67 +436,95 @@
 </script>
 
 <body>
+    <div>
+        <ul class="nav nav-tabs">
+            <nav>
+                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab"
+                        aria-controls="nav-home" aria-selected="true">Dados</a>
+                    <a class="nav-item nav-link" id="nav-separatrizes-tab" data-toggle="tab" href="#nav-separatrizes"
+                        role="tab" aria-controls="nav-separatrizes" aria-selected="false">Separatrizes</a>
+                    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab"
+                        aria-controls="nav-contact" aria-selected="false">Probabilidade</a>
+                </div>
+            </nav>
 
-    <div id="formu">
-        <h2>Selecione a Estimação:</h2>
-        <form name="estimacao" onchange="estima()">
-            <input type="radio" name="quan" value=0 class="bolinha" autofocus />População<br />
-            <input type="radio" name="quan" value=1 class="bolinha" /> Amostra <br />
-        </form>
-        <h2>Digite os Dados:</h2>
-        <form class="formulario-validacao" id="form">
-            <!-- <input type="text" name="scampo" id="sinput" /> -->
-            <textarea type="text" id='input' name="campo" autocomplete="off" placeholder="DIGITE OS NUMEROS COM ESPAÇOS EX: 10 20 30 40
+            <div class="tab-content" id="nav-tabContent">
+
+                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                    <div id="formu">
+                        <h2>Selecione a Estimação:</h2>
+                        <form name="estimacao" onchange="estima()">
+                            <input type="radio" name="quan" value=0 class="bolinha" />População<br />
+                            <input type="radio" name="quan" value=1 class="bolinha" />Amostra <br />
+                        </form>
+                        <h2>Digite os Dados:</h2>
+                        <form class="formulario-validacao" id="form">
+                            <textarea type="text" id='input' name="campo" autocomplete="off" placeholder="DIGITE OS NUMEROS COM ESPAÇOS EX: 10 20 30 40           
             "></textarea>
-            <br>
+                            <br>
+                            <button class="btn btn-lg btn-primary" type="button" name="submit" value="Enviar" onclick="botao(this.form),total()">Enviar</button>
+                        </form>
+                    </div>
+                </div>
+                <!------------------------------------------------------------------------------- -->
+                <div class="tab-pane fade   " id="nav-separatrizes" role="tabpanel" aria-labelledby="separatrizes-tab">
+                    <div id="combos" width="50%">
+                        <h2>Selecione as Medidas: </h2>
+                        <label for="">Quartil(Q):</label>
+                        <select id="C_quartil" class="combo" onchange="casosQuartil()">
+                            <option value="zero"></option>
+                            <option value="Q1">Quartil 1</option>
+                            <option value="Q2">Quartil 2</option>
+                            <option value="Q3">Quartil 3</option>
+                            <option value="Q4">Quartil 4</option>
+                        </select>
+                        <br> <br>
+                        <label for="">Quintil(K):</label>
+                        <select class="combo" id="C_quintil">
+                            <option value="zero"></option>
+                            <option value="K1">Quintil 1</option>
+                            <option value="K2">Quintil 2</option>
+                            <option value="K3">Quintil 3</option>
+                            <option value="K4">Quintil 4</option>
+                            <option value="K5">Quintil 5</option>
+                        </select>
+                        <br><br>
+                        <label for="">Decil(D):</label>
+                        <select class="combo" id="C_decil">
+                            <option value="zero"></option>
+                            <option value="D1">Decil 1</option>
+                            <option value="D2">Decil 2</option>
+                            <option value="D3">Decil 3</option>
+                            <option value="D4">Decil 4</option>
+                            <option value="D5">Decil 5</option>
+                            <option value="D6">Decil 6</option>
+                            <option value="D7">Decil 7</option>
+                            <option value="D8">Decil 8</option>
+                            <option value="D9">Decil 9</option>
+                            <option value="D10">Decil 10</option>
+                        </select>
+                        <br><br>
+                        <label>Percentil(P):</label>
+                        <input id="input_p" size=3>
+                        <br>
+                        <br>
+                        <br>
+                        <button onclick="casosQuartil(vetor),casosQuintil(vetor)">Enviar</button>
 
-            <button type="button" name="submit" value="Enviar" onclick="botao(this.form),total()" class="css3button">Enviar</button>
-        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade " id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+                bla bla
+            </div>
     </div>
-    <div id="combos" width="50%">
-        <h2>Selecione as Medidas: </h2>
-        <label for="">Quartil(Q):</label>
-        <select id="C_quartil" class="combo" onchange="casosQuartil()">
-            <option value="Q1">Quartil 1</option>
-            <option value="Q2">Quartil 2</option>
-            <option value="Q3">Quartil 3</option>
-            <option value="Q4">Quartil 4</option>
-        </select>
-        <br> <br>
-        <label for="">Quintil(K):</label>
-        <select class="combo" id="C_quintil">
-            <option value="K1">Quintil 1</option>
-            <option value="K2">Quintil 2</option>
-            <option value="K3">Quintil 3</option>
-            <option value="K4">Quintil 4</option>
-            <option value="K5">Quintil 5</option>
-        </select>
-        <br><br>
-        <label for="">Decil(D):</label>
-        <select class="combo" id="C_decil">
-            <option value="D1">Decil 1</option>
-            <option value="D2">Decil 2</option>
-            <option value="D3">Decil 3</option>
-            <option value="D4">Decil 4</option>
-            <option value="D5">Decil 5</option>
-            <option value="D6">Decil 6</option>
-            <option value="D7">Decil 7</option>
-            <option value="D8">Decil 8</option>
-            <option value="D9">Decil 9</option>
-            <option value="D10">Decil 10</option>
-        </select>
-        <br><br>
-        <label>Percentil(P):</label>
-        <input id="input_p" size=3>
-        <br>
-        <br>
-        <br>
-        <button onclick="casosQuartil(vetor),casosQuintil(vetor)">Enviar</button>
 
-    </div>
-    <div id="resultado">
+
+
+    <!--<div id="resultado">
         <textarea type="text" name="in" id="teste"></textarea>
-    </div>
+</div>>-->
     <div id="outresultado" class='tabela1'></div>
     <br>
     <div id="outputDiv"></div>

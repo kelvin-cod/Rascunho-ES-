@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script src="main.js"></script>
+    <style></style>
+</head>
+
+<body>
+    <div id="combos" width="50%">
+        <h2>Selecione as Medidas: </h2>
+        <label for="">Quartil(Q):</label>
+        <select id="C_quartil" class="combo" onchange="casosQuartil()">
+            <option value="zero"></option>
+            <option value="Q1">Quartil 1</option>
+            <option value="Q2">Quartil 2</option>
+            <option value="Q3">Quartil 3</option>
+            <option value="Q4">Quartil 4</option>
+        </select>
+        <br> <br>
+        <label for="">Quintil(K):</label>
+        <select class="combo" id="C_quintil">
+            <option value="zero"></option>
+            <option value="K1">Quintil 1</option>
+            <option value="K2">Quintil 2</option>
+            <option value="K3">Quintil 3</option>
+            <option value="K4">Quintil 4</option>
+            <option value="K5">Quintil 5</option>
+        </select>
+        <br><br>
+        <label for="">Decil(D):</label>
+        <select class="combo" id="C_decil">
+            <option value="zero"></option>
+            <option value="D1">Decil 1</option>
+            <option value="D2">Decil 2</option>
+            <option value="D3">Decil 3</option>
+            <option value="D4">Decil 4</option>
+            <option value="D5">Decil 5</option>
+            <option value="D6">Decil 6</option>
+            <option value="D7">Decil 7</option>
+            <option value="D8">Decil 8</option>
+            <option value="D9">Decil 9</option>
+            <option value="D10">Decil 10</option>
+        </select>
+        <br><br>
+        <label>Percentil(P):</label>
+        <input id="input_p" size=3>
+        <br>
+        <br>
+        <br>
+        <button onclick="casosQuartil(vetor),casosQuintil(vetor)">Enviar</button>
+
+    </div>
+</body>
+
+</html>
