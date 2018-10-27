@@ -158,13 +158,15 @@
     let vet100
     let vetor = []
     let somatoriaFi = 0;
+    let str
 
-    function botao(form) {
-        form = (form.campo.value)
-        form = form.replace(/,/g, ".")
-        vet100 = (form.split(' ').map(Number));
-        return vet100
+    function botao() {
+        str = document.getElementById('input').value
+        str = str.replace(/,/g, ".")
+        vet100 = (str.split(' ').map(Number));
         console.log(vet100)
+        return vet100
+
     }
     let est = 0;
 
@@ -194,7 +196,7 @@
             let aux = 0;
             let menor = 0;
 
-            for (let i = 0; i < vet.length - 1; ++i) {
+            for (let i = 0; i < vet.length; ++i) {
                 menor = i //primeiro atribui o valor para parametro                           
                 for (let j = i + 1; j < vet.length; ++j) { // atribui j = a i mais 1
                     if (vet[menor] > vet[j]) { //compara as posiçoes
@@ -246,35 +248,35 @@
                 }
             }
             vetor[x].frequencia = cont // jo NO OBJeto
-            grafico2[x] = vetor[x].frequencia // joga a frequencia para o grafico
-
         }
         //-------------------------------------------------------------
         //frequencia acumulada
         let vet3 = [];
         let aux = 0;
 
-
         function fac() {
             vet3[0] = vetor[0].frequencia
             aux = vetor[0].frequencia
+            vetor[0].fac = vetor[0].frequencia
+            let acumu = 1
+            for (var x = 1; x < vetorLimpo.length; x++) {
 
-            for (var x = 0; x < vetorLimpo.length; x++) {
-
-                aux += vetor[x + 1].frequencia;
-                vet3[x + 1] = aux
+                aux += vetor[acumu].frequencia;
+                console.log(aux)
+                vet3[x] = aux
                 vetor[x].fac = vet3[x]
+                acumu++
             }
-            return aux;
+            return vetor
         }
-        fac() //chama funçao frequencia acumulada
-
+        //chama funçao frequencia acumulada
+        fac()
 
         //---------------------------------------------------------------------
         //calcula a moda
         function funModa() {
             maior = vetor[0].frequencia
-            for (let i = 0; i < vetor.length - 1; ++i) {
+            for (let i = 0; i < vetor.length; ++i) {
                 // ignorar propriedades herdadas
 
                 if (vetor[i].frequencia >= maior) {
@@ -322,9 +324,7 @@
                     mediana = vetor[i].variavelPesquisada
                     break;
                 }
-
             }
-
             return mediana;
         }
         funMediana()
@@ -353,10 +353,9 @@
         funDesvio() //chama funçao desvio padrao
 
         //CALCULA A O TOTAL DE fi
-
-
         function somaFi() {
-            for (let i = 0; i < vetor.length; i++) {
+            somatoriaFi = 0
+            for (let i = 0; i < vetor.length - 1; i++) {
                 somatoriaFi += vetor[i].variavelPesquisada;
                 vetor[i].somaVariavel = somatoriaFi
             }
@@ -396,6 +395,7 @@
         HTML += ('<td>' + totalfac + '%' + '</td>' + '<td>' + vet100.length + '</td><td>' + " " + '</td>')
         HTML += "</tr></table>"; //fecha tabela
         document.getElementById("outputDiv").innerHTML = HTML; //atribui no div
+        totalfac = 0
         //-------------------------------------------------------------------------
         //resultados------------------------------------------------------------------
         var tbl_resul = "<table align=center > <tr>";
@@ -425,7 +425,7 @@
 
     function separatrizes(parametro, vet, medida) {
         // calculo porcentagem
-        for (let j = 0; j < vet.length - 1; ++j) {
+        for (let j = 0; j < vet.length; ++j) {
             Q = (somatoriaFi * parametro) / 100;
             if (Q <= vet[j].somaVariavel) { //pesquisa o objeto e acha o lugar
                 return resposta = ('<h3>' + medida + '(' + Q + ')' +
