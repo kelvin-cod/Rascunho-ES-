@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<script type="text/javascript" src="C:\Users\casa\Documents\GitHub\Easy-Statics\script\Continua.js"></script>
+<script type="text/javascript" src="C:\Users\casa\Documents\GitHub\Easy-Statics\script\Discreta.js"></script>
+<script type="text/javascript" src="C:\Users\casa\Documents\GitHub\Easy-Statics\script\separaTabelas.js"></script>
+<link rel="stylesheet" href="C:\Users\casa\Documents\GitHub\Easy-Statics\css\css\bootstrap.min.css">
+<script>
+    let vetorLimpo = []
+let vet100 = []
+function limpa(vet){
+for(let i = 0;i< vet.length-1;++i){ 
+    vetorLimpo = vet.filter(function (este, i) { 
+        return vet.indexOf(este)==i; })
+     }
+        return vetorLimpo
+}
+
+    function teste() {
+        let aux = vetorLimpo.length;
+        if (aux <= 7) {
+            console.log("Tabela Discreta")
+total(vet100, vetorLimpo)
+        } else {
+            console.log("Tabela Contínua")
+            f_continua(vet100)
+        }
+    }
+</script>
+
+<body>
+    <br>
+    <label for="">Digite os Dados:</label>
+    <input type="text" id="Input">
+    <button id='bot' onclick="botao(),limpa(vet100), teste()">Enviar</button>
+    <div id="outTabela"></div>
+    <br>
+    <div id='outResul'></div>
+    <hr>
+</body>
+
+</html>

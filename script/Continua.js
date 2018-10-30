@@ -286,11 +286,11 @@
      let param;
      somaFi();
      //--------------------------------------------------------------------
-     let tbl_tabela = ('<table align=center>')
+     let tbl_tabela = ('<table align=center class="table table-striped table-bordered">')
      tbl_tabela += ('<h3 align = center>TABELA</h3>')
      tbl_tabela += ('<tr>')
      tbl_tabela += (
-         '<td>Classe</td><td>Intervalo de Classe</td><td>Frequencia(fi)</td><td>Frequencia%</td><td>Frequencia Acumulada</td>'
+         '<th>Classe</th><th>Intervalo de Classe</th><th>Frequencia(fi)</th><th>Frequencia%</th><th>Frequencia Acumulada</th>'
      )
      tbl_tabela += ('</tr>')
      let contClasses = 1
@@ -317,11 +317,11 @@
      document.getElementById("outTabela").innerHTML = tbl_tabela
      //---------------------------------------------------------------------------
      //resultados
-     let tbl_resul = ('<table align = center>')
+     let tbl_resul = ('<table align = center class=" thead-dark table table-striped table-bordered">>')
      tbl_resul += ('<h3 align = center>RESULTADOS</h3>')
      tbl_resul += ('<tr>')
      tbl_resul += (
-         '<td>Media(x)</td><td>Moda(Mo)</td><td>Mediana(Md)</td><td>Desvio Padrao(dx)</td><td>Coificiente Padrão</td><td>Moda de King</td><td>Moda de Czuber</td><td>Moda de Pearson</td>'
+         '<th>Media(x)</th><th>Moda(Mo)</th><th>Mediana(Md)</th><th>Desvio Padrao(dx)</th><th>Coificiente Padrão</th><th>Moda de King</th><th>Moda de Czuber</th><th>Moda de Pearson</th>'
      )
      tbl_resul += ('</tr>') //primeira linha
      tbl_resul += ('<tr>')
