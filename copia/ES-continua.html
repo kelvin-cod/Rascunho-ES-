@@ -36,18 +36,22 @@
         font-family: fantasy
         }
         table {
+
                 border-collapse: collapse;
                 text-align: center;
                 text-decoration: greenyellow
             }
+
             tr:nth-child(even) {
                 background: #d4d4d4;
             }
+
             th,
             td {
                 padding: 5px 8px;
                 border: 1px solid black;
             }
+
             th {
                 border-bottom: 1px solid #d4d4d4;
             }
@@ -82,6 +86,7 @@
             0px -1px 0px rgba(000,000,000,0.7),
             0px 1px 0px rgba(255,255,255,0.3);
             }
+
         </style>
 </head>
 
@@ -102,6 +107,7 @@
 
     function estima() {
         var i
+
         for (i = 0; i < document.estimacao.quan.length; i++) {
             if (document.estimacao.quan[i].checked) {
                 break;
@@ -113,6 +119,7 @@
     function total() {
         let vetorLimpo = []
         let cont = 0
+
         let vetor = []
         //variaveis para intevalo
         let xmax = Math.max(...vet100); //maior valor de um vetor
@@ -120,6 +127,7 @@
         let xmin = Math.min(...vet100); //menor valor de um vetor
         console.log('menor numero: ' + xmin)
         let n = vet100.length // total de elementos do vetor
+
         //--------------------------------------------------------------------------------------------
         function diretasort(vet) {
             console.time("Tempo de Execução Inserção Direta");
@@ -138,39 +146,53 @@
                 //limpa vetor
             }
             console.log(vet)
+
             console.timeEnd("Tempo de Execução Inserção Direta");
         }
+
+
         //-----------------------------------------------------------
         //chama funçar organizar
         diretasort(vet100)
+
         //--formula para continua----------------------------------------------
         let at = 0
         let ic = 0
 
         function intervaloClasse() {
             at = xmax - xmin;
+
             if (xmin !== 0) {
                 k = Math.floor(Math.sqrt(n));
+
             } else {
+
                 k = Math.floor(Math.sqrt(n)) - 1;
                 console.log('vet' + k)
             }
             // k = parseInt(Math.round((Math.sqrt(n))));
+
             let vetk = [k - 1, k, k + 1]
             console.log('k: ' + vetk)
+
             while (ic == 0) {
                 at += 1;
+
                 for (let i = 0; i < vetk.length; i++) {
+
                     if (at % vetk[i] == 0) {
                         ic = at / vetk[i];
                         k = vetk[i]
                         break;
                     }
                 }
+
             }
         }
+
         intervaloClasse()
         console.log('intervalo de classe:' + ic)
+
         //---------------------------------------------------------
         //-- clonar objeto
         let obj = {
@@ -181,31 +203,45 @@
             classe: '',
             limMinimo: '',
             limMaximo: ''
+
         }
         let aux4 = xmin
         let total = []
+
         for (let i = 0; i < k; ++i) {
             vetor[i] = Object.assign({}, obj);
             total.push(aux4 += ic) //atribui o limito maximo
+
             vetor[i].limMaximo = total[i] //atribui o valor para o limite maximo
             vetor[i].limMinimo = vetor[i].limMaximo - ic // atribui o valor para o limite minimo
             vetorLimpo[i] = vetor[i].limMaximo //atribui para parametro
             vetor[i].PontoMedio = (vetor[i].limMinimo + vetor[i].limMaximo) / 2 // ponto medio da classe
+
+
         }; // { a: 1 }
         vetor.push(obj)
+
         //-----------------------------------------------------------------
         aux4 = xmin
+
         //joga frequencia
         for (let x = 0; x < vetor.length - 1; x++) {
+
             cont = 0
+
             for (let y = vet100.length; y >= 0; y--) {
+
                 if ((vet100[y] < vetor[x].limMaximo) && (vet100[y] >= vetor[x].limMinimo)) {
                     cont++;
                 }
+
             }
+
             // jo NO OBJO
             vetor[x].frequencia = cont
+
         }
+
         //-------------------------------------------------------------
         //frequencia acumulada
         let vet3 = []
@@ -214,8 +250,11 @@
         function fac() {
             vet3[0] = vetor[0].frequencia
             aux = vetor[0].frequencia
+
             for (var x = 0; x < vetorLimpo.length; x++) {
+
                 aux += vetor[x + 1].frequencia;
+
                 vet3[x + 1] = aux
                 vetor[x].fac = vet3[x]
             }
@@ -224,10 +263,14 @@
         let moda = 0
         //---------------------------------------------------------------------
         //calcula a moda
+
         function funModa() {
+
             maior = vetor[0].frequencia
+
             for (let i = 0; i < vetor.length; ++i) {
                 // ignorar propriedades herdadas
+
                 if (vetor[i].frequencia >= maior) {
                     maior = vetor[i].frequencia;
                     moda = vetor[i].PontoMedio //acha o ponto medio
@@ -236,78 +279,22 @@
         }
         funModa() //chama funçao moda
         //----------------------------------------------------------------
-
-        //Variáveis para achar a fi posterior e anterior
-        let fiPosterior = 0;
-        let fiAnterior = 0;
-        let MoKing = 0;
-
-        function fun_fi_anterior_posterior() {
-            maior = vetor[0].frequencia
-            for (let i = 0; i < vetor.length; ++i) {
-                // ignorar propriedades herdadas
-                if (vetor[i].frequencia >= maior) {
-                    maior = vetor[i].frequencia;
-                    moda = vetor[i].PontoMedio //acha o ponto medio
-                    limitiMinimo = vetor[i].limMinimo
-
-                    if (i != vetor.length - 1) {
-                        fiPosterior = vetor[i + 1].frequencia;
-                    } else {
-                        fiPosterior = vetor[i].frequencia;
-                    };
-
-                    if (i != 0) {
-                        fiAnterior = vetor[i - 1].frequencia;
-                    } else {
-                        fiAnterior = 0;
-                    }
-                }
-            }
-        }
-        fun_fi_anterior_posterior() //chamar a função fi a p
-
-        //Função da moda de king
-        function ModaKing() {
-            MoKing = (limitiMinimo + ((fiPosterior) / (fiAnterior + fiPosterior)) * ic).toFixed(2)
-            return MoKing;
-        };
-        ModaKing(); // Chamando a função Moda de King
-        console.log(MoKing)
-
-        //Função da moda de Cuzber
-        let MoCuzber = 0;
-
-        function ModaCuzber() {
-            MoCuzber = (limitiMinimo + ((maior - fiAnterior) / ((maior - fiAnterior) + (maior - fiPosterior))) * ic).toFixed(
-                2)
-            return MoCuzber;
-        };
-        ModaCuzber(); // Chamando a função de Moda de Cuzber 
-        console.log(MoCuzber);
-        console.log(moda)
-        console.log(fiAnterior)
-        console.log(fiPosterior)
-
-        let MoPearson = 0;
-
-        function ModaPearson() {
-            MoPearson = ((3 * mediana) - (2 * media)).toFixed(2)
-            return MoPearson;
-        }
-
         // Calcular a Média
         let media = 0;
 
         function funMedia() {
+
             let divisor = 0;
             let dividendo = 0;
+
             for (let i = 0; i < vetor.length; i++) {
                 dividendo += vetor[i].PontoMedio * vetor[i].frequencia;
                 divisor += vetor[i].frequencia;
             }
             media = (dividendo / divisor);
+
             return media;
+
         }
         funMedia()
         //-----------------------------------------------------------------------------
@@ -315,35 +302,39 @@
         // pode dar erro aki
         let mediana = 0;
         let aux5 = 0
+
         let aux6 = 0
 
         function funMediana() {
             aux5 = vet100.length / 2;
+
             // Verifica a posião 
-            for (let i = 0; i < vetor.length; i++) {
+            for (let i = 0; i <= vetor.length; i++) {
+
+                aux6 = vetor[i].fac
 
                 if (vetor[0].fac >= aux5) {
                     aux6 = 0
                     mediana = ((vetor[i].limMinimo + ((aux5 - aux6) / vetor[i].frequencia) * ic))
                     mediana = ((mediana).toFixed(2))
+
                     console.log(mediana)
                     break
+
                 }
+
                 if (aux5 < vetor[i].fac) {
-                    aux6 = vetor[i - 1].fac
+
                     mediana = ((vetor[i].limMinimo + ((aux5 - aux6) / vetor[i].frequencia) * ic))
                     mediana = ((mediana).toFixed(2))
                     break;
                 }
-            }
-            return mediana;
 
+            }
+
+            return mediana;
         }
         funMediana()
-
-        ModaPearson()
-        console.log('Pearson' + MoPearson)
-
         //-----------------------------------------------------------------
         //desvio padrao
         let coificiente = 0
@@ -357,6 +348,7 @@
                 //desvio padrao recebe frequencia - media elevado ao quadrado
                 desvioPadrao += (Math.pow(aux2, 2) * vetor[i].frequencia)
                 console.log(desvioPadrao)
+
             }
             //--------------------------------alerta--------------------------------------------------------
             //se for popula tira o menos 1
@@ -378,10 +370,14 @@
             }
             return somatoriaFi
         }
+
         //Medidas separatrizes
         let Q = 0
+
         let param;
+
         somaFi();
+
         //--------------------------------------------------------------------
         let tbl_tabela = ('<table align=center>')
         tbl_tabela += ('<h3 align = center>TABELA</h3>')
@@ -390,7 +386,9 @@
             '<td>Classe</td><td>Intervalo de Classe</td><td>Frequencia(fi)</td><td>Frequencia%</td><td>Frequencia Acumulada</td>'
         )
         tbl_tabela += ('</tr>')
+
         let contClasses = 1
+
         for (let linha = 0; linha < k; ++linha) {
             tbl_tabela += ('<tr>')
             //primeira coluna classe
@@ -407,6 +405,7 @@
             //quarta coluna
             tbl_tabela += ('<td>' + parseInt((vetor[linha].fac)) + '</td>')
             //quarta coluna
+
             tbl_tabela += ('</tr>')
             contClasses++
         }
@@ -418,7 +417,7 @@
         tbl_resul += ('<h3 align = center>RESULTADOS</h3>')
         tbl_resul += ('<tr>')
         tbl_resul += (
-            '<td>Media(x)</td><td>Moda(Mo)</td><td>Mediana(Md)</td><td>Desvio Padrao(dx)</td><td>Coificiente Padrão</td><td>Moda de King</td><td>Moda de Czuber</td><td>Moda de Pearson</td>'
+            '<td>Media(x)</td><td>Moda(Mo)</td><td>Mediana(Md)</td><td>Desvio Padrao(dx)</td><td>Coificiente Padrão</td>'
         )
         tbl_resul += ('</tr>') //primeira linha
         tbl_resul += ('<tr>')
@@ -427,16 +426,14 @@
         //terceira coluna
         tbl_resul += ('<td>' + mediana + '</td>')
         //quarta coluna
-        tbl_resul += ('<td>' + desvioPadrao.toFixed(2) + '</td>')
+        tbl_resul += ('<td>' + desvioPadrao + '</td>')
         tbl_resul += ('<td>' + coificiente + '%' + '</td>')
-        tbl_resul += ('<td>' + MoKing + '</td>')
-        tbl_resul += ('<td>' + MoCuzber + '</td>')
-        tbl_resul += ('<td>' + MoPearson + '</td>')
         tbl_resul += ('</tr>')
         tbl_resul += ('</table>')
         document.getElementById("outResul").innerHTML = tbl_resul
         //----------------------------------------------------------
         //tabela Quartil
+
         let tbl_quartil = ('<table><br>')
         tbl_quartil += ('<h3 align = center>MEDIDAS SEPARATRIZES</h3>')
         tbl_quartil += ('<tr>')
@@ -447,8 +444,10 @@
         tbl_quartil += ('<td>' + 'Q' + '</td>')
         //enche a tabela
         for (let i = 25; i <= 100; i += 25) {
+
             Q = somatoriaFi * i / 100;
             tbl_quartil += ('<td>' + Q + '</td>')
+
         }
         tbl_quartil += ('</tr>')
         tbl_quartil += ('</table>')
@@ -463,10 +462,13 @@
         tbl_quintil += ('<tr>')
         tbl_quintil += ('<td>' + 'K' + '</td>')
         let cont3 = 0
+
         for (let i = 20; i <= 100; i += 20) {
             Q = somatoriaFi * i / 100;
             tbl_quintil += ('<td> ' + Q + '</td>')
         }
+
+
         tbl_quintil += ('</table>')
         document.getElementById("outquintil").innerHTML = tbl_quintil
         //----------------------------------------------------------------
@@ -476,10 +478,13 @@
         tbl_decil += ('<td>Decil</td>' + '<td>' + 'D1(10%)' + '</td>')
         tbl_decil += ('<td>D2(20%)</td><td>D3(30%)</td><td>D4(40%)</td><td>D5(50%)</td>')
         tbl_decil += ('<td>D6(60%)</td><td>D7(70%)</td><td>D8(80%)</td><td>D9(90%)</td><td>D10(100%)</td>')
+
         tbl_decil += ('</tr>')
         tbl_decil += ('<tr><td>' + 'D' + '</td>')
         cont3 = 0;
+
         for (let i = 10; i <= 100; i += 10) {
+
             tbl_decil += ('<td>')
             Q = somatoriaFi * i / 100;
             tbl_decil += (Q)
@@ -500,6 +505,7 @@
             Q = (somatoriaFi * i) / 100;
             tbl_percentil += (Q)
             tbl_percentil += ('</td>')
+
             tbl_percentil += ('<td>')
             tbl_percentil += ('P' + cont3)
             tbl_percentil += ('</td>')
@@ -507,6 +513,7 @@
         tbl_percentil += ('</tr>')
         tbl_percentil += ('</table>')
         document.getElementById("outpercentil").innerHTML = tbl_percentil
+
     }
 </script>
 
