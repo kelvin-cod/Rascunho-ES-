@@ -22,3 +22,6 @@
        return fileLine // retorna o vetor 
    }
    console.log(fileLine)
+   /*
+     <input type="file" id="inputCSV" onchange="pegaCSV(this)">
+   */
