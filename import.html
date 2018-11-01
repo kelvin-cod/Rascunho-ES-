@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<script>
+    let fileLine=[]
+    var leitorDeCSV = new FileReader()
+    window.onload = function init() {
+        leitorDeCSV.onload = leCSV;
+    }
+    function pegaCSV(inputFile) {
+        var file = inputFile.files[0];
+        leitorDeCSV.readAsText(file);
+    }
+    function leCSV(evt) {
+
+        var fileArr = evt.target.result.split('\n');
+
+        for (var i = 0; i < fileArr.length; i++) {
+            
+fileLine = fileArr[i].split(';').map(Number);
+        console.log(fileLine)
+            
+      
+
+        
+    
+    }
+    }
+</script>
+
+<body>
+    <input type="file" id="inputCSV" onchange="pegaCSV(this)">
+    <div id="CSVsaida"></div>
+</body>
+
+</html>
