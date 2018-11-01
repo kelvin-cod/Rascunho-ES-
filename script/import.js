@@ -1,0 +1,24 @@
+   let fileLine = []
+   var leitorDeCSV = new FileReader()
+   window.onload = function init() {
+       leitorDeCSV.onload = leCSV;
+   }
+
+   function pegaCSV(inputFile) {
+       var file = inputFile.files[0];
+       leitorDeCSV.readAsText(file);
+   }
+
+   function leCSV(evt) {
+       //recebe o arquivo e joga em um vetor
+       var fileArr = evt.target.result.split('\n');
+
+       for (var i = 0; i < fileArr.length; i++) {
+           fileArr[i] = fileArr[i].replace(/,/g, ".")
+           //limpa a string e  joga no vetor
+           fileLine[i] = fileArr[i].split(';').map(Number);
+
+       }
+       return fileLine // retorna o vetor 
+   }
+   console.log(fileLine)
