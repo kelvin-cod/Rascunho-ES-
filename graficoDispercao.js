@@ -1,19 +1,15 @@
 function chama() {
-    for (let i = 0; i < Xindependente.length; i++) {
-        //parametros para as bolinhas
-        return teste.push(([Xindependente[i], Ydependente[i]]))
-    }
+
 
 }
 
 function vet(Xindependente, dependente) {
     // Objeto para bolinhas
-
-
-
-
+    for (let i = 0; i < Xindependente.length; i++) {
+        //parametros para as bolinhas
+        teste.push(([Xindependente[i], Ydependente[i]]))
+    }
     return teste
-
 }
 
 //chart.reflow();
@@ -96,17 +92,7 @@ $(function () {
             label: 'Equação',
             name: 'Pontos',
             color: 'rgba(0,204,105)',
-            data: [
-                [3, 1.5],
-                [5, 2.0],
-                [10, 6.0],
-                [10, 7.0],
-                [20, 10.0],
-                [20, 12.0],
-                [20, 15.0],
-                [30, 8.0],
-                [40, 10.0],
-            ]
+            data: teste
 
 
         }]
